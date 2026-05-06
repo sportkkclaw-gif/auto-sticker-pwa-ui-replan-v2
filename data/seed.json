@@ -1,0 +1,689 @@
+{
+  "users": [
+    {
+      "id": "user_demo_001",
+      "email": "demo@auto-sticker.local",
+      "displayName": "Demo Creator",
+      "role": "creator"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess_demo",
+      "userId": "user_demo_001",
+      "tokenHash": "mock",
+      "expiresAt": "2026-12-31T00:00:00Z"
+    }
+  ],
+  "creditWallets": [
+    {
+      "id": "wallet_demo",
+      "userId": "user_demo_001",
+      "freeCredits": 2,
+      "paidCredits": 10
+    }
+  ],
+  "creditLedgers": [
+    {
+      "id": "ledger_grant",
+      "userId": "user_demo_001",
+      "type": "grant",
+      "amount": 12,
+      "reason": "demo seed"
+    }
+  ],
+  "templateCategories": [
+    {
+      "id": "cat_001",
+      "slug": "portrait",
+      "name": "人像",
+      "sortOrder": 1
+    },
+    {
+      "id": "cat_002",
+      "slug": "emotion",
+      "name": "情緒",
+      "sortOrder": 2
+    },
+    {
+      "id": "cat_003",
+      "slug": "love",
+      "name": "戀愛",
+      "sortOrder": 3
+    },
+    {
+      "id": "cat_004",
+      "slug": "pet",
+      "name": "毛孩",
+      "sortOrder": 4
+    },
+    {
+      "id": "cat_005",
+      "slug": "office",
+      "name": "職場",
+      "sortOrder": 5
+    },
+    {
+      "id": "cat_006",
+      "slug": "festival",
+      "name": "節慶",
+      "sortOrder": 6
+    },
+    {
+      "id": "cat_007",
+      "slug": "brand",
+      "name": "品牌",
+      "sortOrder": 7
+    },
+    {
+      "id": "cat_008",
+      "slug": "reaction",
+      "name": "反應",
+      "sortOrder": 8
+    }
+  ],
+  "templates": [
+    {
+      "id": "tpl_001",
+      "categoryId": "cat_001",
+      "name": "Q版人像",
+      "description": "Q版人像 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "Q版人像，透明背景，LINE貼圖風格",
+      "tags": [
+        "可愛",
+        "人形"
+      ],
+      "defaultCount": 8,
+      "supportsAnimated": true,
+      "isPremium": false,
+      "status": "active"
+    },
+    {
+      "id": "tpl_002",
+      "categoryId": "cat_002",
+      "name": "情緒表情包",
+      "description": "情緒表情包 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "情緒表情包，透明背景，LINE貼圖風格",
+      "tags": [
+        "表情",
+        "情緒"
+      ],
+      "defaultCount": 8,
+      "supportsAnimated": true,
+      "isPremium": false,
+      "status": "active"
+    },
+    {
+      "id": "tpl_003",
+      "categoryId": "cat_003",
+      "name": "戀愛語錄",
+      "description": "戀愛語錄 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "戀愛語錄，透明背景，LINE貼圖風格",
+      "tags": [
+        "情侶",
+        "浪漫"
+      ],
+      "defaultCount": 8,
+      "supportsAnimated": false,
+      "isPremium": false,
+      "status": "active"
+    },
+    {
+      "id": "tpl_004",
+      "categoryId": "cat_004",
+      "name": "毛孩貼圖",
+      "description": "毛孩貼圖 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "毛孩貼圖，透明背景，LINE貼圖風格",
+      "tags": [
+        "寵物",
+        "可愛"
+      ],
+      "defaultCount": 8,
+      "supportsAnimated": true,
+      "isPremium": false,
+      "status": "active"
+    },
+    {
+      "id": "tpl_005",
+      "categoryId": "cat_005",
+      "name": "上班日常",
+      "description": "上班日常 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "上班日常，透明背景，LINE貼圖風格",
+      "tags": [
+        "辦公",
+        "職場"
+      ],
+      "defaultCount": 8,
+      "supportsAnimated": false,
+      "isPremium": true,
+      "status": "active"
+    },
+    {
+      "id": "tpl_006",
+      "categoryId": "cat_006",
+      "name": "節慶祝福",
+      "description": "節慶祝福 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "節慶祝福，透明背景，LINE貼圖風格",
+      "tags": [
+        "節日",
+        "祝福"
+      ],
+      "defaultCount": 8,
+      "supportsAnimated": false,
+      "isPremium": true,
+      "status": "active"
+    },
+    {
+      "id": "tpl_007",
+      "categoryId": "cat_007",
+      "name": "品牌吉祥物",
+      "description": "品牌吉祥物 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "品牌吉祥物，透明背景，LINE貼圖風格",
+      "tags": [
+        "品牌",
+        "IP"
+      ],
+      "defaultCount": 8,
+      "supportsAnimated": true,
+      "isPremium": true,
+      "status": "active"
+    },
+    {
+      "id": "tpl_008",
+      "categoryId": "cat_008",
+      "name": "動態反應",
+      "description": "動態反應 LINE 貼圖模板",
+      "thumbnailUrl": "",
+      "prompt": "動態反應，透明背景，LINE貼圖風格",
+      "tags": [
+        "反應",
+        "GIF"
+      ],
+      "defaultCount": 4,
+      "supportsAnimated": true,
+      "isPremium": false,
+      "status": "active"
+    }
+  ],
+  "promptPresets": [
+    {
+      "id": "prompt_001",
+      "templateId": "tpl_001",
+      "label": "Q版人像預設",
+      "prompt": "Q版人像，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "可愛",
+        "人形"
+      ]
+    },
+    {
+      "id": "prompt_002",
+      "templateId": "tpl_002",
+      "label": "情緒表情包預設",
+      "prompt": "情緒表情包，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "表情",
+        "情緒"
+      ]
+    },
+    {
+      "id": "prompt_003",
+      "templateId": "tpl_003",
+      "label": "戀愛語錄預設",
+      "prompt": "戀愛語錄，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "情侶",
+        "浪漫"
+      ]
+    },
+    {
+      "id": "prompt_004",
+      "templateId": "tpl_004",
+      "label": "毛孩貼圖預設",
+      "prompt": "毛孩貼圖，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "寵物",
+        "可愛"
+      ]
+    },
+    {
+      "id": "prompt_005",
+      "templateId": "tpl_005",
+      "label": "上班日常預設",
+      "prompt": "上班日常，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "辦公",
+        "職場"
+      ]
+    },
+    {
+      "id": "prompt_006",
+      "templateId": "tpl_006",
+      "label": "節慶祝福預設",
+      "prompt": "節慶祝福，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "節日",
+        "祝福"
+      ]
+    },
+    {
+      "id": "prompt_007",
+      "templateId": "tpl_007",
+      "label": "品牌吉祥物預設",
+      "prompt": "品牌吉祥物，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "品牌",
+        "IP"
+      ]
+    },
+    {
+      "id": "prompt_008",
+      "templateId": "tpl_008",
+      "label": "動態反應預設",
+      "prompt": "動態反應，圓潤線條，透明背景",
+      "maxChars": 200,
+      "tags": [
+        "反應",
+        "GIF"
+      ]
+    }
+  ],
+  "sourceAssets": [
+    {
+      "id": "asset_001",
+      "userId": "user_demo_001",
+      "kind": "portrait",
+      "fileUrl": "/mock-uploads/asset_001.png",
+      "width": 1024,
+      "height": 1024,
+      "mimeType": "image/png",
+      "fileSize": 900000,
+      "consent": true,
+      "qualityScore": 88,
+      "createdAt": "2026-05-03T10:00:00Z"
+    },
+    {
+      "id": "asset_002",
+      "userId": "user_demo_001",
+      "kind": "pet",
+      "fileUrl": "/mock-uploads/asset_002.png",
+      "width": 1024,
+      "height": 1024,
+      "mimeType": "image/png",
+      "fileSize": 900000,
+      "consent": true,
+      "qualityScore": 88,
+      "createdAt": "2026-05-03T10:00:00Z"
+    },
+    {
+      "id": "asset_003",
+      "userId": "user_demo_001",
+      "kind": "character",
+      "fileUrl": "/mock-uploads/asset_003.png",
+      "width": 1024,
+      "height": 1024,
+      "mimeType": "image/png",
+      "fileSize": 900000,
+      "consent": true,
+      "qualityScore": 88,
+      "createdAt": "2026-05-03T10:00:00Z"
+    },
+    {
+      "id": "asset_004",
+      "userId": "user_demo_001",
+      "kind": "brand_mascot",
+      "fileUrl": "/mock-uploads/asset_004.png",
+      "width": 1024,
+      "height": 1024,
+      "mimeType": "image/png",
+      "fileSize": 900000,
+      "consent": true,
+      "qualityScore": 88,
+      "createdAt": "2026-05-03T10:00:00Z"
+    }
+  ],
+  "cropStates": [
+    {
+      "id": "crop_001",
+      "assetId": "asset_001",
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 1024,
+      "rotate": 0,
+      "bgRemoved": false
+    },
+    {
+      "id": "crop_002",
+      "assetId": "asset_002",
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 1024,
+      "rotate": 0,
+      "bgRemoved": true
+    },
+    {
+      "id": "crop_003",
+      "assetId": "asset_003",
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 1024,
+      "rotate": 0,
+      "bgRemoved": false
+    },
+    {
+      "id": "crop_004",
+      "assetId": "asset_004",
+      "x": 0,
+      "y": 0,
+      "width": 1024,
+      "height": 1024,
+      "rotate": 0,
+      "bgRemoved": true
+    }
+  ],
+  "projects": [
+    {
+      "id": "w1",
+      "userId": "user_demo_001",
+      "title": "Q版人像 - 我的第一組",
+      "templateId": "tpl_001",
+      "sourceAssetId": "asset_001",
+      "status": "completed",
+      "count": 8,
+      "createdAt": "2026-05-03T10:00:00Z",
+      "updatedAt": "2026-05-03T10:05:00Z"
+    },
+    {
+      "id": "w2",
+      "userId": "user_demo_001",
+      "title": "毛孩貼圖",
+      "templateId": "tpl_002",
+      "sourceAssetId": "asset_002",
+      "status": "in_progress",
+      "count": 8,
+      "createdAt": "2026-05-03T10:00:00Z",
+      "updatedAt": "2026-05-03T10:05:00Z"
+    },
+    {
+      "id": "w3",
+      "userId": "user_demo_001",
+      "title": "情緒表情包",
+      "templateId": "tpl_003",
+      "sourceAssetId": "asset_003",
+      "status": "draft",
+      "count": 4,
+      "createdAt": "2026-05-03T10:00:00Z",
+      "updatedAt": "2026-05-03T10:05:00Z"
+    },
+    {
+      "id": "w4",
+      "userId": "user_demo_001",
+      "title": "測試失敗 - 額度不足",
+      "templateId": "tpl_004",
+      "sourceAssetId": "asset_004",
+      "status": "failed",
+      "count": 8,
+      "createdAt": "2026-05-03T10:00:00Z",
+      "updatedAt": "2026-05-03T10:05:00Z"
+    }
+  ],
+  "generationSettings": [
+    {
+      "id": "gs_001",
+      "projectId": "w1",
+      "removeBackground": true,
+      "addText": false,
+      "whiteStroke": true,
+      "styleStrength": 0.8,
+      "language": "zh-TW",
+      "outputKind": "static_png"
+    },
+    {
+      "id": "gs_002",
+      "projectId": "w2",
+      "removeBackground": true,
+      "addText": false,
+      "whiteStroke": true,
+      "styleStrength": 0.8,
+      "language": "zh-TW",
+      "outputKind": "static_png"
+    },
+    {
+      "id": "gs_003",
+      "projectId": "w3",
+      "removeBackground": true,
+      "addText": false,
+      "whiteStroke": true,
+      "styleStrength": 0.8,
+      "language": "zh-TW",
+      "outputKind": "static_png"
+    },
+    {
+      "id": "gs_004",
+      "projectId": "w4",
+      "removeBackground": true,
+      "addText": false,
+      "whiteStroke": true,
+      "styleStrength": 0.8,
+      "language": "zh-TW",
+      "outputKind": "static_png"
+    }
+  ],
+  "generationJobs": [
+    {
+      "id": "job_001",
+      "projectId": "w1",
+      "userId": "user_demo_001",
+      "templateId": "tpl_001",
+      "prompt": "Q版可愛",
+      "status": "completed",
+      "progress": 100,
+      "provider": "mock",
+      "createdAt": "2026-05-03T10:00:00Z",
+      "completedAt": "2026-05-03T10:02:00Z"
+    }
+  ],
+  "stickerResults": [
+    {
+      "id": "sticker_001",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 0,
+      "text": "開心",
+      "imageUrl": "/mock-stickers/01.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    },
+    {
+      "id": "sticker_002",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 1,
+      "text": "難過",
+      "imageUrl": "/mock-stickers/02.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    },
+    {
+      "id": "sticker_003",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 2,
+      "text": "生氣",
+      "imageUrl": "/mock-stickers/03.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    },
+    {
+      "id": "sticker_004",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 3,
+      "text": "加油",
+      "imageUrl": "/mock-stickers/04.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    },
+    {
+      "id": "sticker_005",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 4,
+      "text": "愛你",
+      "imageUrl": "/mock-stickers/05.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    },
+    {
+      "id": "sticker_006",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 5,
+      "text": "哭哭",
+      "imageUrl": "/mock-stickers/06.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    },
+    {
+      "id": "sticker_007",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 6,
+      "text": "好棒",
+      "imageUrl": "/mock-stickers/07.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    },
+    {
+      "id": "sticker_008",
+      "jobId": "job_001",
+      "projectId": "w1",
+      "index": 7,
+      "text": "呃...",
+      "imageUrl": "/mock-stickers/08.png",
+      "width": 370,
+      "height": 370,
+      "fileSize": 51200,
+      "kind": "static_png",
+      "status": "success"
+    }
+  ],
+  "qcRules": [
+    {
+      "key": "STATIC_FORMAT",
+      "label": "靜態 PNG 格式",
+      "severity": "error"
+    },
+    {
+      "key": "TRANSPARENT_BG",
+      "label": "透明背景",
+      "severity": "error"
+    },
+    {
+      "key": "DIMENSION_EVEN",
+      "label": "寬高為偶數",
+      "severity": "error"
+    },
+    {
+      "key": "FILE_SIZE",
+      "label": "單張 ≤ 1MB",
+      "severity": "error"
+    },
+    {
+      "key": "ZIP_NAMING",
+      "label": "ZIP 命名正確",
+      "severity": "error"
+    },
+    {
+      "key": "MAIN_TAB",
+      "label": "主圖與 Tab 圖區分",
+      "severity": "error"
+    },
+    {
+      "key": "APNG_METADATA",
+      "label": "APNG frame/playback/loop metadata",
+      "severity": "error"
+    }
+  ],
+  "qcReports": [
+    {
+      "id": "qc_pass_w1",
+      "projectId": "w1",
+      "passed": true,
+      "failures": [],
+      "warnings": [
+        {
+          "ruleKey": "REVIEW_NOT_GUARANTEED",
+          "message": "本工具不保證LINE審核通過"
+        }
+      ]
+    }
+  ],
+  "exportPackages": [
+    {
+      "id": "export_w1",
+      "projectId": "w1",
+      "type": "line_static_zip",
+      "status": "ready",
+      "fileUrl": "/mock-exports/w1.zip",
+      "manifestUrl": "/mock-exports/w1-manifest.json",
+      "qcReportId": "qc_pass_w1"
+    }
+  ],
+  "pwaEvents": [],
+  "privacySettings": [
+    {
+      "id": "privacy_demo",
+      "userId": "user_demo_001",
+      "photoRetentionDays": 7,
+      "allowTraining": false,
+      "language": "zh-TW"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif_demo",
+      "userId": "user_demo_001",
+      "type": "generation_completed",
+      "read": false
+    }
+  ]
+}

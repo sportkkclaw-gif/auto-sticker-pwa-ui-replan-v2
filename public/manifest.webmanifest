@@ -1,0 +1,46 @@
+{
+  "name": "AUTO動態貼圖",
+  "short_name": "AI貼圖",
+  "description": "AI LINE 貼圖生成工作室 - 上傳照片×模板，一鍵生成專屬LINE貼圖",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#FF6B8A",
+  "background_color": "#FFF7E8",
+  "categories": ["photo", "entertainment", "utilities"],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "建立貼圖",
+      "short_name": "建立",
+      "url": "/create",
+      "description": "快速建立新貼圖"
+    },
+    {
+      "name": "我的作品",
+      "short_name": "作品",
+      "url": "/works",
+      "description": "查看已建立的貼圖作品"
+    }
+  ]
+}

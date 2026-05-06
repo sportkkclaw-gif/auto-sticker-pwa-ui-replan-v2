@@ -1,0 +1,62 @@
+import assert from 'node:assert/strict';
+import { readFileSync, existsSync } from 'node:fs';
+import { spawn } from 'node:child_process';
+import { setTimeout as delay } from 'node:timers/promises';
+const root = process.cwd();
+const seed = JSON.parse(readFileSync(new URL('../data/seed.json', import.meta.url), 'utf8'));
+let unit=0, api=0, e2e=0;
+function ok(cond, msg, kind='unit'){ assert.ok(cond, msg); if(kind==='unit') unit++; if(kind==='api') api++; if(kind==='e2e') e2e++; console.log(`PASS ${kind}: ${msg}`); }
+ok(Object.keys(seed).length >= 18, '18+ seed data models present');
+ok(seed.templates.length >= 8, 'template seed count >=8');
+ok(seed.templateCategories.length >= 8, 'template categories seed count >=8');
+ok(seed.promptPresets.every(p=>p.maxChars<=200), 'prompt presets enforce 200-char contract');
+ok(seed.sourceAssets.every(a=>a.consent===true), 'source assets carry consent flag');
+ok(seed.cropStates.every(c=>Number.isFinite(c.width)&&Number.isFinite(c.height)), 'crop states have dimensions');
+ok(seed.projects.some(p=>p.status==='completed'), 'completed project seed present');
+ok(seed.generationSettings.every(s=>s.outputKind==='static_png'), 'generation outputKind seeded');
+ok(seed.generationJobs.some(j=>j.provider==='mock'), 'mock AI job seeded');
+ok(seed.stickerResults.every(s=>s.width===370&&s.height===370), 'LINE sticker dimensions seeded');
+ok(seed.qcRules.some(r=>r.key==='APNG_METADATA'), 'APNG metadata QC rule seeded');
+ok(seed.exportPackages.some(e=>e.type==='line_static_zip'), 'LINE ZIP export seed present');
+const pkg = JSON.parse(readFileSync('package.json','utf8'));
+ok(Boolean(pkg.scripts['acceptance:live']), 'acceptance:live script exists');
+ok(existsSync('public/manifest.webmanifest') && existsSync('public/sw.js'), 'PWA manifest and service worker exist');
+ok(/不承諾 LINE 審核必過|不保證LINE審核通過|不保證 LINE 審核通過/.test(readFileSync('PRODUCT_SPEC.md','utf8') + readFileSync('app/export/page.tsx','utf8')), 'no LINE guaranteed-approval promise; disclaimer present');
+async function startServer(){
+  const port = String(3300 + Math.floor(Math.random()*200));
+  const child = spawn('./node_modules/.bin/next',['start'],{cwd:root,env:{...process.env,PORT:port,NEXT_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe']});
+  let logs=''; child.stdout.on('data',d=>logs+=d); child.stderr.on('data',d=>logs+=d);
+  for(let i=0;i<60;i++){
+    try { const r = await fetch(`http://127.0.0.1:${port}/api/health`); if(r.status<500) return {child,base:`http://127.0.0.1:${port}`,logs}; } catch {}
+    await delay(500);
+    if(child.exitCode!==null) throw new Error('next start exited early: '+logs);
+  }
+  child.kill('SIGTERM'); throw new Error('server did not become ready: '+logs);
+}
+async function jsonFetch(base,path,init){ const r=await fetch(base+path,{headers:{'content-type':'application/json'},...init}); let body; try{body=await r.json()}catch{body={}}; return {status:r.status,body,headers:r.headers}; }
+function zipEntries(buffer){ const names=[]; for(let i=0;i<buffer.length-46;i++){ if(buffer.readUInt32LE(i)===0x02014b50){ const nameLen=buffer.readUInt16LE(i+28); const extraLen=buffer.readUInt16LE(i+30); const commentLen=buffer.readUInt16LE(i+32); names.push(buffer.subarray(i+46,i+46+nameLen).toString('utf8')); i += 45 + nameLen + extraLen + commentLen; } } return names; }
+async function zipFetch(base,path){ const r=await fetch(base+path); const buffer=Buffer.from(await r.arrayBuffer()); return {status:r.status,contentType:r.headers.get('content-type')||'',buffer,entries:zipEntries(buffer)}; }
+const {child,base}=await startServer();
+try{
+  let r = await jsonFetch(base,'/api/templates'); ok(r.status===200 && r.body.templates.length>=8, 'GET /api/templates returns seed templates','api');
+  r = await jsonFetch(base,'/api/templates/tpl_001'); ok(r.status===200 && r.body.promptPresets.length>=1, 'GET /api/templates/[id] includes prompts','api');
+  r = await jsonFetch(base,'/api/assets/upload',{method:'POST',body:JSON.stringify({mimeType:'image/png',fileSize:1234,consent:true})}); ok(r.status===201 && r.body.asset.id, 'POST /api/assets/upload creates asset','api'); const assetId=r.body.asset.id;
+  r = await jsonFetch(base,`/api/assets/${assetId}/crop`,{method:'POST',body:JSON.stringify({width:512,height:512})}); ok(r.status===200 && r.body.cropState.width===512, 'POST /api/assets/[id]/crop stores crop','api');
+  r = await jsonFetch(base,`/api/assets/${assetId}/remove-bg`,{method:'POST'}); ok(r.status===200 && r.body.bgRemoved===true, 'POST remove-bg mock succeeds','api');
+  r = await jsonFetch(base,'/api/projects',{method:'POST',body:JSON.stringify({templateId:'tpl_001',sourceAssetId:assetId,count:8,title:'Roundtrip'})}); ok(r.status===201 && r.body.project.id, 'POST /api/projects creates project','api'); const projectId=r.body.project.id;
+  r = await jsonFetch(base,`/api/projects/${projectId}`); ok(r.status===200 && r.body.project.title==='Roundtrip', 'GET /api/projects/[id] reads created project','api');
+  r = await jsonFetch(base,`/api/projects/${projectId}/settings`,{method:'PATCH',body:JSON.stringify({addText:true})}); ok(r.status===200 && r.body.settings.addText===true, 'PATCH project settings works','api');
+  r = await jsonFetch(base,'/api/generation/jobs',{method:'POST',body:JSON.stringify({projectId,templateId:'tpl_001',sourceAssetId:assetId,count:8,prompt:'demo'})}); ok(r.status===201 && r.body.status==='completed', 'POST generation job completes with mock AI','api'); const jobId=r.body.id;
+  r = await jsonFetch(base,`/api/generation/jobs/${jobId}`); ok(r.status===200 && r.body.stickers.length===8, 'GET generation job returns 8 stickers','api');
+  r = await jsonFetch(base,`/api/projects/${projectId}/qc`,{method:'POST',body:JSON.stringify({forceFail:true})}); ok(r.status===200 && r.body.passed===false, 'QC can fail deterministically','api');
+  r = await jsonFetch(base,`/api/projects/${projectId}/export`,{method:'POST'}); ok(r.status===409 && r.body.error.code==='QC_NOT_PASSED', 'QC fail blocks export','api');
+  r = await jsonFetch(base,`/api/projects/${projectId}/qc`,{method:'POST',body:JSON.stringify({})}); ok(r.status===200 && r.body.passed===true, 'QC passes after valid stickers','api');
+  r = await jsonFetch(base,`/api/projects/${projectId}/export`,{method:'POST'}); ok(r.status===201 && r.body.exportPackage.fileUrl.endsWith('.zip'), 'QC pass creates ZIP export','api'); const exportId=r.body.exportPackage.id;
+  const z = await zipFetch(base,`/api/exports/${exportId}/download`); ok(z.status===200 && z.contentType.includes('application/zip') && z.buffer[0]===0x50 && z.buffer[1]===0x4b && ['main.png','tab.png','01.png','02.png','03.png','04.png','05.png','06.png','07.png','08.png','metadata.json','qc_report.html'].every(name=>z.entries.includes(name)), 'download returns ZIP binary with LINE files','api');
+  r = await jsonFetch(base,'/api/credits/balance'); ok(r.status===200 && r.body.total>=0, 'credits balance API works','api');
+  r = await jsonFetch(base,'/api/pwa/install-event',{method:'POST',body:JSON.stringify({platform:'ios',event:'installed'})}); ok(r.status===200 && r.body.pwaEvent.platform==='ios', 'PWA install event API works','api');
+  for (const page of ['/', '/create', '/preview', '/export', '/works']) { const pr = await fetch(base+page); ok(pr.status===200, `page ${page} renders`, 'e2e'); }
+  ok(true, 'create→upload→crop→generate→QC→export ZIP roundtrip passed', 'e2e');
+} finally { child.kill('SIGKILL'); await delay(300); }
+console.log(`SUMMARY unit=${unit} api=${api} e2e=${e2e}`);
+assert.ok(unit>=12 && api>=12 && e2e>=5, 'required test counts met');
