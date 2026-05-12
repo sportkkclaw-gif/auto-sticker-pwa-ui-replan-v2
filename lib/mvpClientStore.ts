@@ -36,7 +36,7 @@ export const TEMPLATES: Template[] = [
 ];
 export const CATEGORIES = ['全部','Q版人像','情緒表情包','戀愛語錄','毛孩貼圖','節日祝福','職場迷因'];
 export const PACKAGES = [
-  { id:'trial', name:'體驗包', price:'NT$99', credits:30 },
+  { id:'starter', name:'體驗包', price:'NT$99', credits:30 },
   { id:'standard', name:'標準包', price:'NT$199', credits:80, recommended:true },
   { id:'creator', name:'創作者包', price:'NT$499', credits:250 },
   { id:'business', name:'商用包', price:'NT$999', credits:600 },
@@ -46,13 +46,13 @@ export const defaultUser = { id:'user_demo_001', email:'demo@auto-sticker.local'
 export function ensureMvpState() {
   if (!isBrowser()) return;
   if (!localStorage.getItem(K.user)) write(K.user, defaultUser);
-  if (!localStorage.getItem(K.wallet)) write(K.wallet, { free_credits:2, bonus_credits:0, paid_credits:0, updated_at: now() } satisfies Wallet);
+  if (!localStorage.getItem(K.wallet)) write(K.wallet, { free_credits:2, bonus_credits:0, paid_credits:30, updated_at: now() } satisfies Wallet);
   if (!localStorage.getItem(K.tx)) write(K.tx, [{ id:id('tx'), created_at:now(), type:'grant_free', direction:'increase', credits:2, description:'新使用者免費點數' }] satisfies CreditTransaction[]);
   if (!localStorage.getItem(K.works)) write(K.works, [] as Work[]);
   if (!localStorage.getItem(K.payments)) write(K.payments, [] as Payment[]);
 }
 export function resetMvpState(){ if(!isBrowser()) return; Object.values(K).forEach(k=>localStorage.removeItem(k)); ensureMvpState(); }
-export function getWallet(): Wallet { ensureMvpState(); return read(K.wallet, { free_credits:2, bonus_credits:0, paid_credits:0, updated_at: now() }); }
+export function getWallet(): Wallet { ensureMvpState(); return read(K.wallet, { free_credits:2, bonus_credits:0, paid_credits:30, updated_at: now() }); }
 export function totalCredits(w=getWallet()){ return w.free_credits + w.bonus_credits + w.paid_credits; }
 export function getTransactions(): CreditTransaction[]{ ensureMvpState(); return read(K.tx, []); }
 function addTx(tx: Omit<CreditTransaction,'id'|'created_at'>){ const list=[{ id:id('tx'), created_at:now(), ...tx }, ...getTransactions()]; write(K.tx,list); return list[0]; }

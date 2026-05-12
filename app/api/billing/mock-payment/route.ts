@@ -1,3 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-const packages: Record<string,{name:string; price:string; credits:number}> = { trial:{name:'體驗包',price:'NT$99',credits:30}, standard:{name:'標準包',price:'NT$199',credits:80}, creator:{name:'創作者包',price:'NT$499',credits:250}, business:{name:'商用包',price:'NT$999',credits:600} };
-export async function POST(req: NextRequest){ const body=await req.json().catch(()=>({})); const pack=packages[body.packageId]||packages.standard; return NextResponse.json({ payment:{ id:`pay_${Date.now()}`, status:'created', ...pack, test_complete_endpoint:'/billing' } }, {status:201}); }
+import { CREDIT_PACKAGES, createPayment } from '@/lib/mock-store';
+
+export async function GET() {
+  return NextResponse.json({ packages: CREDIT_PACKAGES });
+}
+
+export async function POST(req: NextRequest) {
+  const body = await req.json().catch(() => ({}));
+  const payment = createPayment(body.packageId || 'standard');
+  return NextResponse.json({ payment }, { status: 201 });
+}

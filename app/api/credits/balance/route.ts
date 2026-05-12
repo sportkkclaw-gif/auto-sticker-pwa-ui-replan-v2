@@ -1,5 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-const state = globalThis as typeof globalThis & { __AUTO_MVP_WALLET__?: any; __AUTO_MVP_TX__?: any[] };
-function init(){ if(!state.__AUTO_MVP_WALLET__) state.__AUTO_MVP_WALLET__={ userId:'user_demo_001', free_credits:2, bonus_credits:0, paid_credits:0, updatedAt:new Date().toISOString() }; if(!state.__AUTO_MVP_TX__) state.__AUTO_MVP_TX__=[{id:'tx_seed', type:'grant_free', direction:'increase', credits:2, description:'新使用者免費點數', createdAt:new Date().toISOString()}]; }
-export async function GET(_req: NextRequest){ init(); const w=state.__AUTO_MVP_WALLET__!; return NextResponse.json({ ...w, total:w.free_credits+w.bonus_credits+w.paid_credits, transactions:state.__AUTO_MVP_TX__ }); }
-export async function POST(req: NextRequest){ init(); const body=await req.json().catch(()=>({})); const amount=Number(body.amount||0); const type=body.type||'adjustment'; if(type==='purchase'&&amount>0){ state.__AUTO_MVP_WALLET__!.paid_credits+=amount; state.__AUTO_MVP_WALLET__!.updatedAt=new Date().toISOString(); } const ledger={ id:'tx_'+Date.now(), type, direction:amount>=0?'increase':'decrease', credits:Math.abs(amount), description:body.description||'點數異動', work_id:body.work_id, payment_id:body.payment_id, createdAt:new Date().toISOString()}; state.__AUTO_MVP_TX__!.unshift(ledger); return NextResponse.json({ wallet:state.__AUTO_MVP_WALLET__, ledger }); }
+import { consumeCredits, getTransactions, getWallet } from '@/lib/mock-store';
+
+export async function GET(_req: NextRequest) {
+  return NextResponse.json({ ...getWallet(), transactions: getTransactions() });
+}
+
+export async function POST(req: NextRequest) {
+  const body = await req.json().catch(() => ({}));
+  const type = body.type || 'consume';
+  if (type === 'consume') {
+    const result = consumeCredits(Number(body.amount || 0), body.description || '點數扣除', body.work_id);
+    if (!result.ok) return NextResponse.json(result, { status: result.status });
+    return NextResponse.json({ wallet: result.wallet, transaction: result.transaction });
+  }
+  return NextResponse.json({ error: 'UNSUPPORTED_CREDIT_OPERATION', message: 'Commercial MVP Stage 1 API only supports type=consume here; purchases must use mock-payment complete API.' }, { status: 400 });
+}

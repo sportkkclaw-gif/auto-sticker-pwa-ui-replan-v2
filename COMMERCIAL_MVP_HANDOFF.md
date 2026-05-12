@@ -1,27 +1,58 @@
-# COMMERCIAL_MVP_HANDOFF — AUTO 動態貼圖商業 MVP 第一階段
+# COMMERCIAL_MVP_HANDOFF.md — Simon REJECTED Fix Resubmission Notes
 
-updated_at: 2026-05-12T21:53:57+08:00
-cloud_url: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app
-git_branch: acceptance
-qc_status: not_submitted_to_simon_for_new_phase
+updated_at: 2026-05-12T23:30:06+08:00
+product: AUTO 動態貼圖｜AI LINE 貼圖生成工作室
+status: ready_for_resubmission
+commercial_mvp_stage_1_status: pending_simon_qc_resubmission
+qc_last_decision: REJECTED
+responsibility: OP_DELIVERY_DEFECT
+rejected_commit: 4413e4e
 
-## Completed in this iteration
-- Upgraded existing AUTO PWA from static demo toward commercial MVP flow.
-- Added localStorage business state: demo user, wallet, transactions, payments, works.
-- Added insufficient-credit gate: initial free_credits=2 blocks 8/16/24 sticker creation until mock purchase.
-- Added `/billing` mock purchase flow and transaction history.
-- Added `/account`, `/line-guide`, `/terms`, `/offline`, `/api/works/[id]/download`.
-- Updated responsive layout so desktop is no longer only a centered phone-sized page.
-- Pushed GitHub acceptance commit and verified Vercel cloud preview.
+## Important status separation
+Legacy UI demo stage was previously Simon APPROVED. That approval does not apply to Commercial MVP Stage 1. Commercial MVP Stage 1 was REJECTED and is now fixed for resubmission; it is not approved yet.
+
+## Rejected reasons
+- mock payment API did not increase paid_credits after payment creation
+- consume API wrote ledger but did not deduct wallet credits
+- truth pack mixed legacy UI APPROVED status with Commercial MVP Stage 1 not-submitted state
+- acceptance:live did not fully validate Commercial MVP /api/works/[id]/download ZIP contract
+- API commercial credit loop depended too much on UI localStorage rather than server-side API state
+
+## Fixes completed
+- Added shared server-side mock store in lib/mock-store.ts using globalThis.__AUTO_STICKER_MOCK_STORE__ with single wallet/payments/transactions/works state.
+- POST /api/billing/mock-payment now only creates a created payment with packageId/name/amount/currency/credits/created_at.
+- Added POST /api/billing/mock-payment/[id]/complete; it completes once, increases paid_credits, writes purchase transaction, returns updated wallet, and is idempotent.
+- POST /api/credits/balance type=consume now normalizes positive/negative amount, checks sufficient balance, deducts free→bonus→paid, writes transaction with balance_after, and persists wallet for subsequent GET.
+- Added POST /api/works minimal mock create endpoint backed by the same store and credit deduction.
+- Updated /billing UI to call mock-payment create + complete APIs instead of only localStorage mutation.
+- Updated node --run test and acceptance:live to validate Commercial MVP credit API flow plus /api/works/demo/download ZIP entries, README.txt, and line_sticker_info.json.
+- Rewrote truth pack/docs so legacy UI approval is separated from Commercial MVP Stage 1 REJECTED→pending_simon_qc_resubmission.
 
 ## Verification
-- Source build/test/acceptance PASS.
-- Repo clean install build/test/acceptance PASS before push.
-- Vercel deployment status success.
-- Cloud route probe PASS including ZIP download with `PK` and required entries.
+- Build PASS.
+- Test PASS (`SUMMARY unit=15 api=24 e2e=6`).
+- Acceptance live PASS and now validates `/api/works/demo/download` Commercial ZIP.
 
-## Known limitations for next phase
-- Data persistence is localStorage / in-memory mock, not Supabase.
-- Payment is mock only; no Google Play Billing / Stripe.
-- AI generation is mock; no real image provider.
-- New commercial phase has not been formally sent to Simon QC in lane workflow.
+## Limitations
+- Mock commercial flow only.
+- No real payment provider.
+- No real AI generation API.
+- No durable DB/Supabase; server-side global in-memory store only for Stage 1 validation/demo.
+
+## Next step
+Ready for Simon QC resubmission after cloud redeploy/probe evidence is attached.
+
+
+## Cloud verification attached — 2026-05-12T23:34:46+08:00
+- cloud_url: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/
+- Vercel status: success.
+- `AUTO_STICKER_BASE_URL=https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app node --run acceptance:live`: PASS.
+- API probe before payment total: 624.
+- Mock payment create: status `created`, package `business`, credits `600`.
+- Mock payment complete: status `completed`, wallet total `1224`.
+- Balance after payment persisted: total `1224`.
+- Consume -8: wallet total `1216`, transaction balance_after total `1216`.
+- Balance after consume persisted: total `1216`.
+- Commercial ZIP: status `200`, content-type `application/zip`, magic `PK`.
+- Commercial ZIP entries: images/01.png, images/02.png, images/03.png, images/04.png, images/05.png, images/06.png, images/07.png, images/08.png, README.txt, line_sticker_info.json.
+- Page route table: 14/14 checked routes returned HTTP 200.

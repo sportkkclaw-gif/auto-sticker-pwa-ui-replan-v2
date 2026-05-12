@@ -1,28 +1,27 @@
-# TEST_REPORT — AUTO 動態貼圖商業 MVP 第一階段
+# TEST_REPORT.md — Commercial MVP Stage 1 Simon REJECTED Fix
 
-updated_at: 2026-05-12T21:46:16+08:00
+updated_at: 2026-05-12T23:30:06+08:00
+status: ready_for_resubmission
+commercial_mvp_stage_1_status: pending_simon_qc_resubmission
+qc_last_decision: REJECTED
 
-## Controller canonical results
+## Local controller commands
+- `NEXT_TELEMETRY_DISABLED=1 node --run build`: PASS.
+- `node --run test`: PASS.
+  - summary: `unit=15 api=24 e2e=6`
+  - includes mock payment create/complete idempotency, consume wallet deduction, insufficient credits, Commercial ZIP checks.
+- `node --run acceptance:live`: PASS.
+  - Commercial credits API verified: initial=32, afterPayment=632, afterConsume=624.
+  - `/api/works/demo/download`: status 200, content-type `application/zip`, ZIP magic `PK`.
+  - Commercial ZIP entries verified: `images/01.png` through `images/08.png`, `README.txt`, `line_sticker_info.json`.
+  - Legacy `/api/exports/[id]/download` remains secondary compatibility check, not primary Commercial MVP evidence.
 
-- `NEXT_TELEMETRY_DISABLED=1 node --run build` — PASS
-- `node --run test` — PASS，unit=15 / api=17 / e2e=6
-- `node --run acceptance:live` — PASS，legacy create→QC→export ZIP gate 維持通過
-- Production route probe — PASS：`/`, `/create`, `/templates`, `/templates/tpl_001`, `/works`, `/account`, `/billing`, `/install`, `/line-guide`, `/privacy`, `/terms`, `/api/credits/balance`, `/api/billing/mock-payment`
-- Commercial ZIP probe — PASS：`/api/works/demo_work/download` 回 `application/zip`，magic bytes `PK`，entries: `images/01.png`～`images/08.png`, `README.txt`, `line_sticker_info.json`
-- Browser screenshot probe — PASS：390x844 mobile screenshots generated for home/create/billing/account/templates；billing screenshot verified as real credits page, not error page.
+## Simon REJECTED defects addressed
+- mock payment API did not increase paid_credits after payment creation
+- consume API wrote ledger but did not deduct wallet credits
+- truth pack mixed legacy UI APPROVED status with Commercial MVP Stage 1 not-submitted state
+- acceptance:live did not fully validate Commercial MVP /api/works/[id]/download ZIP contract
+- API commercial credit loop depended too much on UI localStorage rather than server-side API state
 
-## 商業 MVP 覆蓋
-
-- 初始點數：free_credits=2, bonus_credits=0, paid_credits=0
-- 點數不足：8/16/24 張建立前阻擋，導到 `/billing`
-- Mock purchase：建立 mock payment → 測試付款完成 → 增加 paid_credits → 交易紀錄
-- 建立作品：上傳檢查 JPG/PNG/WebP + 10MB，選模板，確認點數，扣點，生成 work，mock completed
-- 作品：列表、詳情、重新生成、刪除、ZIP 下載
-- 法務/PWA：`/install`, `/privacy`, `/terms`, `/line-guide`, service worker, manifest
-
-
-## Cloud deployment
-- URL: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app
-- Git branch: acceptance (latest pushed commit)
-- Vercel status: success via GitHub Vercel check at 2026-05-12T21:53:57+08:00
-- Cloud route probe PASS: /, /create, /templates, /templates/tpl_001, /works, /account, /billing, /install, /line-guide, /privacy, /terms, /api/credits/balance, /api/works/demo/download.
+## Cloud verification
+Pending after Vercel redeploy of this fix commit; final probe evidence will be appended after deployment.

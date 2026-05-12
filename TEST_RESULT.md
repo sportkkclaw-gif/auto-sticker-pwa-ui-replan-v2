@@ -60,3 +60,18 @@ delivery_id: 1777998205677
 - Browser visual: `/tmp/auto-commercial-showcase/cloud_create.png` verified as functional create flow, not error page
 
 - SUPAGENT verification note (2026-05-12T22:08:35+08:00): Final SUPAGENT read-only verification used MiniMax-M2.7 but reported stale/path-not-found in child context; controller absolute-path verification remained canonical and PASS.
+
+
+## Cloud verification attached — 2026-05-12T23:34:46+08:00
+- cloud_url: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/
+- Vercel status: success.
+- `AUTO_STICKER_BASE_URL=https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app node --run acceptance:live`: PASS.
+- API probe before payment total: 624.
+- Mock payment create: status `created`, package `business`, credits `600`.
+- Mock payment complete: status `completed`, wallet total `1224`.
+- Balance after payment persisted: total `1224`.
+- Consume -8: wallet total `1216`, transaction balance_after total `1216`.
+- Balance after consume persisted: total `1216`.
+- Commercial ZIP: status `200`, content-type `application/zip`, magic `PK`.
+- Commercial ZIP entries: images/01.png, images/02.png, images/03.png, images/04.png, images/05.png, images/06.png, images/07.png, images/08.png, README.txt, line_sticker_info.json.
+- Page route table: 14/14 checked routes returned HTTP 200.

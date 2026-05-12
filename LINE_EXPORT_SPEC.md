@@ -1,37 +1,67 @@
-# LINE_EXPORT_SPEC — AUTO 動態貼圖 ZIP 匯出
+# LINE_EXPORT_SPEC.md — Commercial MVP ZIP Contract
 
-updated_at: 2026-05-12T21:46:16+08:00
+updated_at: 2026-05-12T23:30:06+08:00
+status: pending_simon_qc_resubmission
 
-## Endpoint
+## Primary Commercial MVP endpoint
 `GET /api/works/[id]/download`
 
-## ZIP entries
-```txt
-images/
-  01.png
-  02.png
-  03.png
-  04.png
-  05.png
-  06.png
-  07.png
-  08.png
-README.txt
-line_sticker_info.json
+For demo validation:
+`GET /api/works/demo/download`
+
+## Required response
+- HTTP 200
+- `Content-Type: application/zip`
+- magic bytes: `PK`
+- ZIP can be decompressed/read by acceptance script
+
+## Required entries
+- `images/01.png`
+- `images/02.png`
+- `images/03.png`
+- `images/04.png`
+- `images/05.png`
+- `images/06.png`
+- `images/07.png`
+- `images/08.png`
+- `README.txt`
+- `line_sticker_info.json`
+
+## README.txt required meanings/keywords
+- AUTO 動態貼圖
+- LINE Creators Market
+- 不保證 LINE 一定審核通過
+- 肖像權
+- 著作權
+- 商業使用權
+- 取得當事人同意
+
+## line_sticker_info.json required fields
+```json
+{
+  "work_id": "demo",
+  "app": "AUTO 動態貼圖",
+  "line_package": "static_sticker_mvp",
+  "images": [
+    "images/01.png", "images/02.png", "images/03.png", "images/04.png",
+    "images/05.png", "images/06.png", "images/07.png", "images/08.png"
+  ]
+}
 ```
 
-## README.txt disclaimer
-包含：
-1. 本工具不保證 LINE 一定審核通過。
-2. 使用者需確認圖片人物、肖像權、著作權與商業使用權。
-3. 若圖片包含真人，請取得當事人同意。
-
-## Validation
-Commercial ZIP probe confirmed `Content-Type: application/zip`, magic bytes `PK`, and required entries present.
+Legacy `/api/exports/[id]/download` remains as secondary compatibility but is no longer the primary Commercial MVP Stage 1 acceptance target.
 
 
-## Cloud deployment
-- URL: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app
-- Git branch: acceptance (latest pushed commit)
-- Vercel status: success via GitHub Vercel check at 2026-05-12T21:53:57+08:00
-- Cloud route probe PASS: /, /create, /templates, /templates/tpl_001, /works, /account, /billing, /install, /line-guide, /privacy, /terms, /api/credits/balance, /api/works/demo/download.
+## Cloud verification attached — 2026-05-12T23:34:46+08:00
+- cloud_url: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/
+- Vercel status: success.
+- `AUTO_STICKER_BASE_URL=https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app node --run acceptance:live`: PASS.
+- API probe before payment total: 624.
+- Mock payment create: status `created`, package `business`, credits `600`.
+- Mock payment complete: status `completed`, wallet total `1224`.
+- Balance after payment persisted: total `1224`.
+- Consume -8: wallet total `1216`, transaction balance_after total `1216`.
+- Balance after consume persisted: total `1216`.
+- Commercial ZIP: status `200`, content-type `application/zip`, magic `PK`.
+- Commercial ZIP entries: images/01.png, images/02.png, images/03.png, images/04.png, images/05.png, images/06.png, images/07.png, images/08.png, README.txt, line_sticker_info.json.
+- Page route table: 14/14 checked routes returned HTTP 200.

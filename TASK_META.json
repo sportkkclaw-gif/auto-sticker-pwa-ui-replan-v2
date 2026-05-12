@@ -1,353 +1,82 @@
 {
   "schema_version": "truth-pack.v1",
+  "project": "AUTO 動態貼圖｜AI LINE 貼圖生成工作室",
   "task_id": "20260502_auto_sticker_pwa_ui_replan_v2",
-  "source_task_id": "20260502_auto_sticker_pwa_ui_replan_v2",
-  "product_name": "AUTO動態貼圖",
-  "status": "approved",
-  "owner": "sebastian",
-  "next_agent": null,
-  "next_event": null,
-  "event_received": "plan.ready",
-  "created_at": "2026-05-02T23:57:22+08:00",
-  "updated_at": "2026-05-12T22:08:35+08:00",
-  "required_files": [
-    "PRODUCT_SPEC.md",
-    "UI_PWA_SPEC.md",
-    "PAGE_FLOW.md",
-    "OP_HANDOFF.md",
-    "FULL_BUILD_CHECKLIST.md",
-    "ACCEPTANCE.md",
-    "RISKS.md",
-    "SEBASTIAN_START_PROMPT.md",
-    "TASK_META.json",
-    "RC.md",
-    "NEXT_STEP.md",
-    "TEST_RESULT.md",
-    "README.md"
-  ],
-  "ui_reference_assets": [
-    "assets/ui_refs/01_cute_pastel_sticker_workshop.png",
-    "assets/ui_refs/02_modern_ai_sticker_studio_pwa.png",
-    "assets/ui_refs/03_mint_three_step_sticker_generator.png"
-  ],
-  "must_not_use_old_dashboard_home": true,
-  "mock_ai_required": true,
-  "line_qc_required": true,
-  "webhook_deliveries": [
-    {
-      "event_type": "plan.ready",
-      "target": "sebastian-plan-ready",
-      "url": "http://127.0.0.1:8646/webhooks/sebastian-plan-ready",
-      "http_status": 202,
-      "delivery_id": "1777737833252",
-      "response": {
-        "status": "accepted",
-        "route": "sebastian-plan-ready",
-        "event": "plan.ready",
-        "delivery_id": "1777737833252"
-      },
-      "sent_at": "2026-05-03T00:00:20+08:00",
-      "last_error": null,
-      "sent_by": "sophie_direct_handoff"
-    },
-    {
-      "event_type": "build.ready",
-      "target": "simon-build-ready",
-      "url": "http://127.0.0.1:8647/webhooks/simon-build-ready",
-      "http_status": 202,
-      "delivery_id": "1777983013560",
-      "response": {
-        "status": "accepted",
-        "route": "simon-build-ready",
-        "event": "build.ready",
-        "delivery_id": "1777983013560"
-      },
-      "sent_at": "2026-05-05T20:10:13+08:00",
-      "last_error": null,
-      "sent_by": "webhook_dispatcher_vNext"
-    },
-    {
-      "event_type": "build.ready",
-      "target": "simon-build-ready",
-      "url": "http://127.0.0.1:8647/webhooks/simon-build-ready",
-      "http_status": 202,
-      "delivery_id": "1777988037736",
-      "response": {
-        "status": "accepted",
-        "route": "simon-build-ready",
-        "event": "build.ready",
-        "delivery_id": "1777988037736"
-      },
-      "sent_at": "2026-05-05T21:33:57+08:00",
-      "last_error": null,
-      "sent_by": "webhook_dispatcher_vNext"
-    },
-    {
-      "event_type": "build.ready",
-      "target": "simon-build-ready",
-      "url": "http://127.0.0.1:8647/webhooks/simon-build-ready",
-      "http_status": 202,
-      "delivery_id": "1777998205677",
-      "response": {
-        "status": "accepted",
-        "route": "simon-build-ready",
-        "event": "build.ready",
-        "delivery_id": "1777998205677"
-      },
-      "sent_at": "2026-05-06T00:23:25+08:00",
-      "last_error": null,
-      "sent_by": "webhook_dispatcher_vNext"
-    }
-  ],
-  "delivery": {
-    "mode": "webhook",
-    "event_type": "plan.ready",
-    "target": "sebastian-plan-ready",
-    "url": "http://127.0.0.1:8646/webhooks/sebastian-plan-ready",
-    "http_status": 202,
-    "delivery_id": "1777737833252",
-    "response": {
-      "status": "accepted",
-      "route": "sebastian-plan-ready",
-      "event": "plan.ready",
-      "delivery_id": "1777737833252"
-    },
-    "sent_at": "2026-05-03T00:00:20+08:00",
-    "last_error": null,
-    "sent_by": "sophie_direct_handoff"
+  "repo": "sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2",
+  "branch": "acceptance",
+  "cloud_url": "https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/",
+  "updated_at": "2026-05-12T23:34:46+08:00",
+  "legacy_ui_stage": {
+    "status": "approved",
+    "qc_last_decision": "APPROVED",
+    "note": "Legacy UI demo stage was previously approved. This approval does not apply to Commercial MVP Stage 1."
   },
-  "current_lane": "05_驗收通過",
-  "task_path": "/home/sport/WORK/AGENTS/05_驗收通過/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-  "working_folder": "/home/sport/WORK/AGENTS/03_待驗收/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-  "ops_notes": [
-    {
-      "at": "2026-05-03T00:33:03+08:00",
-      "by": "Hermes系統管理員",
-      "note": "Hourly governance canonicalized current_lane/task_path fields after transfer/lane-conflict repair."
-    },
-    {
-      "at": "2026-05-03T13:22:28+08:00",
-      "by": "sebastian-op-cron",
-      "note": "SUPAGENT-first attempts failed with HTTP 429 (MiniMax-M2.7 weekly quota). Controller confirmed package has no package.json and build cannot run."
-    },
-    {
-      "at": "2026-05-05T19:10:59+08:00",
-      "by": "sebastian-op-cron",
-      "note": "SUPAGENT-first implementation timeout left usable scaffold; controller verified build/test/live probes. npm blocker cleared; task moved to 02_開發中. remaining_p0_count recomputed from checklist."
-    },
-    {
-      "at": "2026-05-05T20:09:55+08:00",
-      "by": "sebastian-op-cron",
-      "note": "P0 closed with controller source+D build/test/acceptance evidence; ready for build.ready dispatch."
-    },
-    {
-      "at": "2026-05-05T20:49:00+08:00",
-      "by": "sebastian-op-cron",
-      "note": "SUPAGENT-first audit hit lane cwd drift FileNotFoundError. Controller fallback repaired D node_modules .bin/next and copied missing Next package pieces; D test/acceptance still depend on production build. Exact D node --run build timed out before clean PASS and removed BUILD_ID; restored .next from source for safety. Gate remains returned_for_fix."
-    },
-    {
-      "at": "2026-05-05T22:21:09+08:00",
-      "by": "sebastian-op-cron",
-      "note": "SUPAGENT-first implementation/audit both hit stale cwd FileNotFoundError; controller absolute-path fallback fixed source ZIP download and source gates PASS. D final-review package remains blocked by incomplete node_modules (.bin/next missing) after npm ci/rsync/cp timeouts; not sent to QC."
-    },
-    {
-      "at": "2026-05-05T22:26:18+08:00",
-      "by": "sebastian-op-cron",
-      "note": "D node_modules repair advanced from missing .bin/next to missing Next internals (../../lib/picocolors); exact D package still not executable, build.ready not dispatched."
-    },
-    {
-      "at": "2026-05-05T23:14:00+08:00",
-      "by": "sebastian-op-cron",
-      "note": "SUPAGENT-first audit failed from stale cwd; controller absolute-path fallback attempted D dependency repair. D state: node_modules/.bin/next=no, node_modules/next/dist/lib/format-cli-help-output.js=no, node_modules/next/dist/lib/picocolors.js=no, .next/BUILD_ID=yes, package.json=yes, app=yes, public=yes, prisma=no; build: exit 1: /bin/sh: 1: next: not found"
-    },
-    {
-      "at": "2026-05-06T00:23:25+08:00",
-      "by": "sebastian-op-cron",
-      "note": "SUPAGENT-first audit timed out; controller fallback repaired exact D package dependencies. D npm ci hit ENOTEMPTY, rsync resume restored real node_modules; exact D node --run build/test/acceptance:live all exit 0. BUILD_ID source/D equal auto-sticker-pwa-qc-20260505."
-    },
-    {
-      "at": "2026-05-06T00:23:25+08:00",
-      "by": "sebastian-op-cron",
-      "note": "build.ready dispatched to Simon with delivery_id=1777998205677 http_status=202; post-dispatch truth pack synced to D."
-    }
-  ],
-  "internal_next_action": "awaiting_simon_verdict",
-  "external_blockers": [],
-  "formal_status": "approved",
-  "remaining_p0_count": 0,
-  "ready_for_build_ready": true,
-  "all_must_fix_completed": true,
-  "last_verified_commands": [
-    {
-      "cmd": "node --run build",
-      "cwd": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-      "exit_code": 0,
-      "summary": "PASS Next.js production build"
-    },
-    {
-      "cmd": "node --run test",
-      "cwd": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-      "exit_code": 0,
-      "summary": "PASS SUMMARY unit=15 api=17 e2e=6; API asserts ZIP binary entries"
-    },
-    {
-      "cmd": "node --run acceptance:live",
-      "cwd": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-      "exit_code": 0,
-      "summary": "PASS Export download ZIP verified: application/zip entries main.png,tab.png,01..08.png,metadata.json,qc_report.html"
-    },
-    {
-      "cmd": "D node --run build/test/acceptance:live after dependency repair attempts",
-      "cwd": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-      "exit_code": 1,
-      "summary": "D build latest fails: Cannot find module ../../lib/picocolors from next/dist/build/output/log.js; D test/acceptance not clean. Source gates remain PASS."
-    },
-    {
-      "cmd": "SUPAGENT audit D dependency repair",
-      "cwd": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-      "exit_code": 1,
-      "summary": "Subagent could not execute tools because session cwd still pointed to deleted 01_選題池 path; treated as advisory only."
-    },
-    {
-      "cmd": "controller fallback: cp -a source/node_modules/next D/node_modules/next + D node --run build",
-      "cwd": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-      "exit_code": 1,
-      "summary": "copy timed out/partial; D build remains not clean: exit 1: /bin/sh: 1: next: not found"
-    }
-  ],
-  "dispatcher_last_checked_at": "2026-05-06T00:23:25+08:00",
-  "dispatcher_last_action": {
-    "event_type": "build.ready",
-    "target": "simon-build-ready",
-    "url": "http://127.0.0.1:8647/webhooks/simon-build-ready",
-    "http_status": 202,
-    "delivery_id": "1777998205677",
-    "response": {
-      "status": "accepted",
-      "route": "simon-build-ready",
-      "event": "build.ready",
-      "delivery_id": "1777998205677"
-    },
-    "sent_at": "2026-05-06T00:23:25+08:00",
-    "last_error": null,
-    "sent_by": "webhook_dispatcher_vNext"
-  },
-  "last_dispatched_event": "build.ready",
-  "last_dispatched_at": "2026-05-06T00:23:25+08:00",
-  "workflow_history": [
-    {
-      "at": "2026-05-05T20:10:13+08:00",
-      "by": "webhook_dispatcher_vNext",
-      "action": "clear_next_event_after_delivery",
-      "event_type": "build.ready",
-      "target": "simon-build-ready",
-      "http_status": 202
-    },
-    {
-      "at": "2026-05-05T21:33:17+08:00",
-      "by": "sebastian-op-controller",
-      "action": "fresh_d_package_real_node_modules_resubmission",
-      "result": "D exact public commands PASS; real node_modules; BUILD_ID=auto-sticker-pwa-qc-20260505; queued build.ready."
-    },
-    {
-      "at": "2026-05-05T21:33:57+08:00",
-      "by": "webhook_dispatcher_vNext",
-      "action": "clear_next_event_after_delivery",
-      "event_type": "build.ready",
-      "target": "simon-build-ready",
-      "http_status": 202,
-      "delivery_id": "1777988037736"
-    },
-    {
-      "at": "2026-05-05T21:40:15+08:00",
-      "by": "simon-qc",
-      "action": "review.rejected",
-      "result": "REJECTED OP_DELIVERY_DEFECT export download not ZIP",
-      "report": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2/_simon_review_records/20260505T214015_REJECTED.md"
-    },
-    {
-      "at": "2026-05-06T00:23:25+08:00",
-      "by": "webhook_dispatcher_vNext",
-      "action": "clear_next_event_after_delivery",
-      "event_type": "build.ready",
-      "target": "simon-build-ready",
-      "http_status": 202
-    }
-  ],
-  "delivery_id": "1777998205677",
-  "review_event": "review.done",
-  "qc_last_decision": "APPROVED",
-  "latest_review": {
-    "verdict": "APPROVED",
-    "reviewed_at": "2026-05-06T00:37:44+08:00",
-    "report_path": "/home/sport/WORK/AGENTS/05_驗收通過/sebastian/20260502_auto_sticker_pwa_ui_replan_v2/_simon_review_records/simon_APPROVED_20260506T003744.md",
-    "review_event": "review.done"
-  },
-  "outputs": {
-    "latest_simon_review_report": "/home/sport/WORK/AGENTS/05_驗收通過/sebastian/20260502_auto_sticker_pwa_ui_replan_v2/_simon_review_records/simon_APPROVED_20260506T003744.md"
-  },
-  "verification": {
-    "simon_qc_verdict": "REJECTED",
+  "commercial_mvp_stage_1": {
+    "status": "pending_simon_qc_resubmission",
+    "qc_last_decision": "REJECTED",
+    "rejected_at": "2026-05-12",
     "responsibility": "OP_DELIVERY_DEFECT",
-    "blocker": "export download endpoint returns JSON manifest/mockZip instead of actual ZIP binary",
-    "qc_live_pages_api_positive": "pages + workflow create/generate/qc/export create passed",
-    "qc_download_probe": "HTTP 200 Content-Type application/json; not ZIP binary",
-    "d_return_path": "/mnt/d/WORK/成品區/_退回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2__simon_rejected_20260505T214015",
-    "d_move_status": "moved_pending_to_return",
-    "review_report": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2/_simon_review_records/20260505T214015_REJECTED.md",
-    "final_sync_self_check": {
-      "source_exists": true,
-      "source_03_absent": true,
-      "d_pending_absent": true,
-      "d_sync_target": "/mnt/d/WORK/成品區/_退回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2__simon_rejected_20260505T214015",
-      "hash_match_before_final_meta_update": {
-        "RC.md": true,
-        "NEXT_STEP.md": true,
-        "TEST_RESULT.md": true,
-        "TASK_META.json": true
+    "rejected_commit": "4413e4e",
+    "resubmission_ready": true,
+    "blocked_reasons": [
+      "mock payment API did not increase paid_credits after payment creation",
+      "consume API wrote ledger but did not deduct wallet credits",
+      "truth pack mixed legacy UI APPROVED status with Commercial MVP Stage 1 not-submitted state",
+      "acceptance:live did not fully validate Commercial MVP /api/works/[id]/download ZIP contract",
+      "API commercial credit loop depended too much on UI localStorage rather than server-side API state"
+    ],
+    "fix_summary": [
+      "Added shared server-side mock store in lib/mock-store.ts using globalThis.__AUTO_STICKER_MOCK_STORE__ with single wallet/payments/transactions/works state.",
+      "POST /api/billing/mock-payment now only creates a created payment with packageId/name/amount/currency/credits/created_at.",
+      "Added POST /api/billing/mock-payment/[id]/complete; it completes once, increases paid_credits, writes purchase transaction, returns updated wallet, and is idempotent.",
+      "POST /api/credits/balance type=consume now normalizes positive/negative amount, checks sufficient balance, deducts free→bonus→paid, writes transaction with balance_after, and persists wallet for subsequent GET.",
+      "Added POST /api/works minimal mock create endpoint backed by the same store and credit deduction.",
+      "Updated /billing UI to call mock-payment create + complete APIs instead of only localStorage mutation.",
+      "Updated node --run test and acceptance:live to validate Commercial MVP credit API flow plus /api/works/demo/download ZIP entries, README.txt, and line_sticker_info.json.",
+      "Rewrote truth pack/docs so legacy UI approval is separated from Commercial MVP Stage 1 REJECTED→pending_simon_qc_resubmission."
+    ],
+    "mock_flow_limitations": [
+      "currently mock commercial flow",
+      "not real payment processing",
+      "not real AI generation API",
+      "not persistent DB/Supabase; server-side global in-memory mock store only for Stage 1 validation/demo"
+    ],
+    "verification": {
+      "local_build": "NEXT_TELEMETRY_DISABLED=1 node --run build PASS",
+      "local_test": "node --run test PASS SUMMARY unit=15 api=24 e2e=6",
+      "local_acceptance_live": "node --run acceptance:live PASS; validates /api/works/demo/download commercial ZIP",
+      "cloud_probe": "PASS after Vercel deploy: payment +600, consume -8, /api/works/demo/download ZIP entries verified, page route table 200",
+      "cloud_url": "https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/",
+      "cloud_probe_snapshot": {
+        "wallet_before_probe_total": 624,
+        "wallet_after_payment_total": 1224,
+        "wallet_after_consume_total": 1216,
+        "payment_created_status": "created",
+        "payment_completed_status": "completed",
+        "zip_status": 200,
+        "zip_content_type": "application/zip",
+        "zip_magic": "PK",
+        "zip_entries": [
+          "images/01.png",
+          "images/02.png",
+          "images/03.png",
+          "images/04.png",
+          "images/05.png",
+          "images/06.png",
+          "images/07.png",
+          "images/08.png",
+          "README.txt",
+          "line_sticker_info.json"
+        ]
       }
-    },
-    "simon_approved_at": "2026-05-06T00:37:44+08:00",
-    "d_package_path": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-    "d_build_id": "auto-sticker-pwa-qc-20260505"
+    }
   },
-  "ready_for_build_ready_reason": "Controller verified exact D final-review package build/test/acceptance clean exit 0 after real node_modules repair; P0 remaining 0.",
-  "d_pending_package_allowed": true,
-  "d_final_review_package_path": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
-  "build_id": "auto-sticker-pwa-qc-20260505",
-  "resubmission_reason": "Simon rejected due D package broken node_modules symlink. Rebuilt fresh D package with real node_modules, patched Next.js root/BUILD_ID config, reran D public commands build/test/acceptance all PASS.",
-  "build_ready_pending": false,
-  "director_gate_status": "cleared",
-  "director_blockers": [],
-  "must_fix_remaining": [],
-  "latest_verdict": "APPROVED",
-  "commercial_mvp_phase": {
-    "phase": "commercial_mvp_stage_1",
-    "status": "implemented_cloud_deployed_not_simon_qc_submitted",
-    "updated_at": "2026-05-12T22:08:35+08:00",
-    "cloud_url": "https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app",
-    "github_repo": "sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2",
-    "github_branch": "acceptance",
-    "vercel_status": "success",
-    "implemented": [
-      "auth/session demo state",
-      "credit wallet and transactions",
-      "templates and template detail",
-      "create flow with insufficient-credit gate",
-      "works list/detail",
-      "mock payment",
-      "ZIP download",
-      "billing/account/install/privacy/terms/line-guide pages"
-    ],
-    "controller_evidence": [
-      "node --run build exit 0",
-      "node --run test exit 0 SUMMARY unit=15 api=17 e2e=6",
-      "node --run acceptance:live exit 0",
-      "cloud route probe 13/13 PASS",
-      "cloud ZIP download application/zip PK",
-      "browser screenshot verified cloud create page"
-    ],
-    "qc_note": "This is a post-approval commercial MVP upgrade; old Simon APPROVED verdict is preserved, new phase has not been dispatched as build.ready.",
-    "last_supagent_verification_note": "Final SUPAGENT read-only verification used MiniMax-M2.7 but reported stale/path-not-found in child context; controller absolute-path verification remained canonical and PASS."
+  "current_lane": "commercial_mvp_stage_1_pending_simon_qc",
+  "current_status": "ready_for_resubmission",
+  "next_action": "resubmit to Simon QC after cloud redeploy/probe evidence is attached",
+  "not_approved_notice": "Commercial MVP Stage 1 is not APPROVED. Current status is ready for Simon QC resubmission only.",
+  "supagent_first_evidence": {
+    "implementation_subagent": "MiniMax-M2.7 attempted first; child context had stale 01_選題池 cwd and could not access canonical 05/repo paths; no files modified by child.",
+    "audit_subagent": "MiniMax-M2.7 audit timed out; controller fallback used absolute-path verification per delivery-to-review stale-cwd guidance."
   }
 }
