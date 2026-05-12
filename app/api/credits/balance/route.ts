@@ -1,29 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-export async function GET(_req: NextRequest) {
-  const wallet = {
-    userId: 'user_demo_001',
-    freeCredits: 2,
-    paidCredits: 10,
-    total: 12,
-    updatedAt: new Date().toISOString(),
-  };
-
-  return NextResponse.json(wallet);
-}
-
-export async function POST(req: NextRequest) {
-  const body = await req.json().catch(() => ({}));
-  const { type, amount } = body;
-
-  const ledger = {
-    id: 'ledger_' + Date.now(),
-    userId: 'user_demo_001',
-    type,
-    amount,
-    reason: type === 'purchase' ? '購買點數包' : type === 'grant' ? '新用戶獎勵' : '消費',
-    createdAt: new Date().toISOString(),
-  };
-
-  return NextResponse.json({ ledger });
-}
+const state = globalThis as typeof globalThis & { __AUTO_MVP_WALLET__?: any; __AUTO_MVP_TX__?: any[] };
+function init(){ if(!state.__AUTO_MVP_WALLET__) state.__AUTO_MVP_WALLET__={ userId:'user_demo_001', free_credits:2, bonus_credits:0, paid_credits:0, updatedAt:new Date().toISOString() }; if(!state.__AUTO_MVP_TX__) state.__AUTO_MVP_TX__=[{id:'tx_seed', type:'grant_free', direction:'increase', credits:2, description:'新使用者免費點數', createdAt:new Date().toISOString()}]; }
+export async function GET(_req: NextRequest){ init(); const w=state.__AUTO_MVP_WALLET__!; return NextResponse.json({ ...w, total:w.free_credits+w.bonus_credits+w.paid_credits, transactions:state.__AUTO_MVP_TX__ }); }
+export async function POST(req: NextRequest){ init(); const body=await req.json().catch(()=>({})); const amount=Number(body.amount||0); const type=body.type||'adjustment'; if(type==='purchase'&&amount>0){ state.__AUTO_MVP_WALLET__!.paid_credits+=amount; state.__AUTO_MVP_WALLET__!.updatedAt=new Date().toISOString(); } const ledger={ id:'tx_'+Date.now(), type, direction:amount>=0?'increase':'decrease', credits:Math.abs(amount), description:body.description||'點數異動', work_id:body.work_id, payment_id:body.payment_id, createdAt:new Date().toISOString()}; state.__AUTO_MVP_TX__!.unshift(ledger); return NextResponse.json({ wallet:state.__AUTO_MVP_WALLET__, ledger }); }

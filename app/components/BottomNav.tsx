@@ -6,7 +6,7 @@ const NAV_ITEMS = [
   { href: '/', label: '首頁', icon: '🏠' },
   { href: '/templates', label: '模板', icon: '🎨' },
   { href: '/works', label: '作品', icon: '📦' },
-  { href: '/me', label: '我的', icon: '👤' },
+  { href: '/account', label: '帳戶', icon: '👤' },
 ];
 
 export default function BottomNav() {
@@ -17,7 +17,7 @@ export default function BottomNav() {
         <Link
           key={item.href}
           href={item.href}
-          className={pathname === item.href ? 'active' : ''}
+          className={(pathname === item.href || (item.href === '/account' && pathname === '/me')) ? 'active' : ''}
         >
           <span className="nav-icon">{item.icon}</span>
           {item.label}

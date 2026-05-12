@@ -9,7 +9,7 @@
   "next_event": null,
   "event_received": "plan.ready",
   "created_at": "2026-05-02T23:57:22+08:00",
-  "updated_at": "2026-05-06T00:37:44+08:00",
+  "updated_at": "2026-05-12T22:08:35+08:00",
   "required_files": [
     "PRODUCT_SPEC.md",
     "UI_PWA_SPEC.md",
@@ -320,5 +320,34 @@
   "director_gate_status": "cleared",
   "director_blockers": [],
   "must_fix_remaining": [],
-  "latest_verdict": "APPROVED"
+  "latest_verdict": "APPROVED",
+  "commercial_mvp_phase": {
+    "phase": "commercial_mvp_stage_1",
+    "status": "implemented_cloud_deployed_not_simon_qc_submitted",
+    "updated_at": "2026-05-12T22:08:35+08:00",
+    "cloud_url": "https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app",
+    "github_repo": "sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2",
+    "github_branch": "acceptance",
+    "vercel_status": "success",
+    "implemented": [
+      "auth/session demo state",
+      "credit wallet and transactions",
+      "templates and template detail",
+      "create flow with insufficient-credit gate",
+      "works list/detail",
+      "mock payment",
+      "ZIP download",
+      "billing/account/install/privacy/terms/line-guide pages"
+    ],
+    "controller_evidence": [
+      "node --run build exit 0",
+      "node --run test exit 0 SUMMARY unit=15 api=17 e2e=6",
+      "node --run acceptance:live exit 0",
+      "cloud route probe 13/13 PASS",
+      "cloud ZIP download application/zip PK",
+      "browser screenshot verified cloud create page"
+    ],
+    "qc_note": "This is a post-approval commercial MVP upgrade; old Simon APPROVED verdict is preserved, new phase has not been dispatched as build.ready.",
+    "last_supagent_verification_note": "Final SUPAGENT read-only verification used MiniMax-M2.7 but reported stale/path-not-found in child context; controller absolute-path verification remained canonical and PASS."
+  }
 }
