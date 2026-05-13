@@ -12,7 +12,7 @@ async function expect(path, status=200, init){ const r=await fetch(base+path,{he
 function zipEntries(buffer){ const names=[]; for(let i=0;i<buffer.length-46;i++){ if(buffer.readUInt32LE(i)===0x02014b50){ const nameLen=buffer.readUInt16LE(i+28); const extraLen=buffer.readUInt16LE(i+30); const commentLen=buffer.readUInt16LE(i+32); names.push(buffer.subarray(i+46,i+46+nameLen).toString('utf8')); i += 45 + nameLen + extraLen + commentLen; } } return names; }
 function unzipStored(buffer){ const files={}; for(let i=0;i<buffer.length-30;i++){ if(buffer.readUInt32LE(i)===0x04034b50){ const compMethod=buffer.readUInt16LE(i+8); const size=buffer.readUInt32LE(i+18); const nameLen=buffer.readUInt16LE(i+26); const extraLen=buffer.readUInt16LE(i+28); const name=buffer.subarray(i+30,i+30+nameLen).toString('utf8'); const dataStart=i+30+nameLen+extraLen; if(compMethod===0) files[name]=buffer.subarray(dataStart,dataStart+size); i=dataStart+size-1; } } return files; }
 function requireLegacyZip(buffer){ if(buffer[0]!==0x50 || buffer[1]!==0x4b) throw new Error('legacy download is not ZIP magic PK'); const entries=zipEntries(buffer); const required=['main.png','tab.png','01.png','02.png','03.png','04.png','05.png','06.png','07.png','08.png','metadata.json','qc_report.html']; const missing=required.filter(name=>!entries.includes(name)); if(missing.length) throw new Error(`legacy ZIP missing entries: ${missing.join(', ')}; got ${entries.join(', ')}`); return entries; }
-function requireCommercialZip(buffer){
+function requireCommercialZip(buffer, expectedWorkId = 'demo'){
   if(buffer[0]!==0x50 || buffer[1]!==0x4b) throw new Error('commercial works download is not ZIP magic PK');
   const entries=zipEntries(buffer);
   const required=['images/01.png','images/02.png','images/03.png','images/04.png','images/05.png','images/06.png','images/07.png','images/08.png','README.txt','line_sticker_info.json'];
@@ -21,7 +21,7 @@ function requireCommercialZip(buffer){
   const readme=(files['README.txt']||Buffer.from('')).toString('utf8');
   for (const kw of ['AUTO 動態貼圖','LINE Creators Market','不保證 LINE 一定審核通過','肖像權','著作權','商業使用權','取得當事人同意']) if(!readme.includes(kw)) throw new Error(`commercial README missing keyword: ${kw}`);
   const info=JSON.parse((files['line_sticker_info.json']||Buffer.from('{}')).toString('utf8'));
-  if(info.work_id!=='demo') throw new Error(`line_sticker_info work_id expected demo got ${info.work_id}`);
+  if(info.work_id!==expectedWorkId) throw new Error(`line_sticker_info work_id expected ${expectedWorkId} got ${info.work_id}`);
   if(info.app!=='AUTO 動態貼圖') throw new Error(`line_sticker_info app mismatch`);
   if(info.line_package!=='static_sticker_mvp') throw new Error(`line_sticker_info line_package mismatch`);
   for (const name of required.filter(x=>x.startsWith('images/'))) if(!info.images?.includes(name)) throw new Error(`line_sticker_info images missing ${name}`);
@@ -30,7 +30,13 @@ function requireCommercialZip(buffer){
 try {
   for (const p of ['/', '/templates', '/create', '/preview', '/export', '/works', '/account', '/billing']) await expect(p,200);
 
+  await expect('/api/demo/reset',200,{method:'POST',body:JSON.stringify({})});
   const initial = await (await expect('/api/credits/balance',200)).json();
+  if(initial.total >= 8) throw new Error(`fresh demo wallet must be insufficient for 8-credit create; got ${initial.total}`);
+  const insufficient = await (await expect('/api/works',402,{method:'POST',body:JSON.stringify({templateId:'tpl_001',imageCount:8,title:'Acceptance insufficient'})})).json();
+  if(insufficient.error !== 'INSUFFICIENT_CREDITS') throw new Error('fresh insufficient create did not return INSUFFICIENT_CREDITS');
+  const createPageBefore = await expect('/create',200);
+  if(!(await createPageBefore.text()).includes('API wallet')) throw new Error('/create does not disclose API wallet source');
   const paymentCreated = await (await expect('/api/billing/mock-payment',201,{method:'POST',body:JSON.stringify({packageId:'business'})})).json();
   if(paymentCreated.payment.status !== 'created' || paymentCreated.payment.credits !== 600) throw new Error('mock payment create contract failed');
   const paymentCompleted = await (await expect(`/api/billing/mock-payment/${paymentCreated.payment.id}/complete`,200,{method:'POST',body:JSON.stringify({})})).json();
@@ -39,12 +45,23 @@ try {
   if(paymentCompletedAgain.wallet.paid_credits !== paymentCompleted.wallet.paid_credits) throw new Error('complete payment idempotency failed: paid credits changed on second call');
   const afterPayment = await (await expect('/api/credits/balance',200)).json();
   if(afterPayment.paid_credits !== paymentCompleted.wallet.paid_credits) throw new Error('balance after payment did not persist');
+  if(afterPayment.total < 8) throw new Error('after billing complete, /create still cannot afford minimum work');
+  const createPageAfter = await expect('/create',200);
+  if(!(await createPageAfter.text()).includes('建立貼圖')) throw new Error('/create did not render after billing complete');
+  const workCreated = await (await expect('/api/works',201,{method:'POST',body:JSON.stringify({templateId:'tpl_001',imageCount:8,title:'Acceptance Browser Flow Work'})})).json();
+  if(workCreated.wallet.total !== afterPayment.total - 8) throw new Error(`creating work did not deduct 8 credits: before ${afterPayment.total} after ${workCreated.wallet.total}`);
+  const createdWorkId = workCreated.work.id;
+  for (const path of ['/account','/billing','/create','/works',`/works/${createdWorkId}`]) await expect(path,200);
+  const createdWorkDownload = await expect(`/api/works/${createdWorkId}/download`,200);
+  const createdWorkType = createdWorkDownload.headers.get('content-type') || '';
+  if(!createdWorkType.includes('application/zip')) throw new Error('created work ZIP content-type mismatch');
+  requireCommercialZip(Buffer.from(await createdWorkDownload.arrayBuffer()), createdWorkId);
   const consumed = await (await expect('/api/credits/balance',200,{method:'POST',body:JSON.stringify({type:'consume',amount:-8,description:'acceptance deduct probe'})})).json();
-  if(consumed.wallet.total !== afterPayment.total - 8) throw new Error(`consume did not reduce total by 8: before ${afterPayment.total} after ${consumed.wallet.total}`);
+  if(consumed.wallet.total !== workCreated.wallet.total - 8) throw new Error(`consume did not reduce total by 8: before ${workCreated.wallet.total} after ${consumed.wallet.total}`);
   if(consumed.transaction.balance_after.total !== consumed.wallet.total) throw new Error('consume ledger balance_after mismatch');
   const afterConsume = await (await expect('/api/credits/balance',200)).json();
   if(afterConsume.total !== consumed.wallet.total) throw new Error('balance after consume did not persist');
-  console.log(`Commercial credits API verified: initial=${initial.total} afterPayment=${afterPayment.total} afterConsume=${afterConsume.total}`);
+  console.log(`Commercial browser/API flow verified: initial=${initial.total} afterPayment=${afterPayment.total} afterCreate=${workCreated.wallet.total} afterConsume=${afterConsume.total} work=${createdWorkId}`);
 
   const commercialDownload = await expect('/api/works/demo/download',200);
   const commercialType = commercialDownload.headers.get('content-type') || '';

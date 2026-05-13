@@ -5,7 +5,7 @@
   "repo": "sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2",
   "branch": "acceptance",
   "cloud_url": "https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/",
-  "updated_at": "2026-05-12T23:34:46+08:00",
+  "updated_at": "2026-05-13T08:44:41+08:00",
   "legacy_ui_stage": {
     "status": "approved",
     "qc_last_decision": "APPROVED",
@@ -68,7 +68,31 @@
           "README.txt",
           "line_sticker_info.json"
         ]
-      }
+      },
+      "build": "PASS: NEXT_TELEMETRY_DISABLED=1 node --run build",
+      "test": "PASS: node --run test -> SUMMARY unit=15 api=26 e2e=18",
+      "acceptance_live": "PASS: initial=2 afterPayment=602 afterCreate=594 afterConsume=586; created work ZIP and demo ZIP verified"
+    },
+    "latest_rejected_defects_fixed": [
+      "/create and /billing wallet split closed: /create, /billing, /account, /works now read API mock store via /api/credits/balance and /api/works",
+      "Fresh demo reset starts at total=2 (<8) and /api/works create returns INSUFFICIENT_CREDITS before purchase",
+      "Billing complete increases API paid credits and create flow can immediately create a work using those credits",
+      "Work creation deducts credits in API store; account/billing/create/works render same API wallet source and ledger",
+      "test-suite and acceptance:live now cover browser/main flow insufficient -> billing complete -> create work -> works detail -> ZIP download",
+      "TEST_RESULT.md top rewritten to dual status; legacy approved is historical only, Commercial MVP Stage 1 remains pending/resubmission"
+    ],
+    "stage2_notice": "Commercial ZIP still uses Stage 1 mock placeholder images; documented as acceptable for Stage 1 only, not allowed for Stage 2.",
+    "supagent_first_note": "Implementation SUPAGENT MiniMax-M2.7 timed out after 600s; audit SUPAGENT hit stale cwd FileNotFoundError. Controller completed fallback per skill and verified canonical repo.",
+    "cloud_verification": {
+      "verified_at": "2026-05-13T08:44:41+08:00",
+      "cloud_url": "https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/",
+      "vercel_status": "success",
+      "acceptance_live": "PASS",
+      "browser_api_flow": "initial=2 afterPayment=602 afterCreate=594 afterConsume=586",
+      "created_work_detail": "PASS",
+      "created_work_zip": "PASS",
+      "demo_zip": "PASS",
+      "legacy_zip_secondary": "PASS"
     }
   },
   "current_lane": "commercial_mvp_stage_1_pending_simon_qc",

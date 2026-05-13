@@ -72,7 +72,7 @@ function createInitialStore(): Store {
     userId: 'user_demo_001',
     free_credits: 2,
     bonus_credits: 0,
-    paid_credits: 30,
+    paid_credits: 0,
     updated_at: now(),
   };
   return {
@@ -91,8 +91,8 @@ function createInitialStore(): Store {
         id: 'tx_seed_paid',
         type: 'purchase',
         direction: 'increase',
-        credits: 30,
-        description: 'Commercial MVP Stage 1 seed paid credits',
+        credits: 0,
+        description: 'Commercial MVP Stage 1 starts with no paid credits for insufficient-flow verification',
         balance_after: walletWithTotal(wallet),
         created_at: now(),
       },
@@ -100,6 +100,16 @@ function createInitialStore(): Store {
     payments: {},
     works: {},
   };
+}
+
+
+export function resetMockStore() {
+  g.__AUTO_STICKER_MOCK_STORE__ = createInitialStore();
+  return getMockStore();
+}
+
+export function getWork(workId: string) {
+  return getMockStore().works[workId];
 }
 
 export function getMockStore(): Store {
