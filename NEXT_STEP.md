@@ -1,68 +1,25 @@
-# NEXT_STEP.md — Commercial MVP Stage 1 pending Simon QC resubmission
+# NEXT_STEP.md — Sebastian returned fix
 
-updated_at: 2026-05-12T23:30:06+08:00
-status: ready_for_resubmission
-commercial_mvp_stage_1_status: pending_simon_qc_resubmission
-qc_last_decision: REJECTED
-next_action: resubmit to Simon QC after cloud redeploy/probe evidence is attached
-not_approved_notice: Do not mark approved unless Simon re-reviews and approves this Commercial MVP Stage 1 fix.
+updated_at: 2026-05-13T20:52:04+08:00
+status: returned_for_fix
+next_event: null
+next_agent: sebastian
 
-## Completed in this OP_DELIVERY_DEFECT patch
-- Added shared server-side mock store in lib/mock-store.ts using globalThis.__AUTO_STICKER_MOCK_STORE__ with single wallet/payments/transactions/works state.
-- POST /api/billing/mock-payment now only creates a created payment with packageId/name/amount/currency/credits/created_at.
-- Added POST /api/billing/mock-payment/[id]/complete; it completes once, increases paid_credits, writes purchase transaction, returns updated wallet, and is idempotent.
-- POST /api/credits/balance type=consume now normalizes positive/negative amount, checks sufficient balance, deducts free→bonus→paid, writes transaction with balance_after, and persists wallet for subsequent GET.
-- Added POST /api/works minimal mock create endpoint backed by the same store and credit deduction.
-- Updated /billing UI to call mock-payment create + complete APIs instead of only localStorage mutation.
-- Updated node --run test and acceptance:live to validate Commercial MVP credit API flow plus /api/works/demo/download ZIP entries, README.txt, and line_sticker_info.json.
-- Rewrote truth pack/docs so legacy UI approval is separated from Commercial MVP Stage 1 REJECTED→pending_simon_qc_resubmission.
+## Next minimum executable action
+Run exact D path build with durable log; if it still hangs, repair/realign D node_modules/runtime atomically, then rerun `node --run build`, `node --run test`, and `node --run acceptance:live` in D.
 
-## Required Simon re-check focus
-1. `GET /api/credits/balance` initial wallet.
-2. `POST /api/billing/mock-payment` creates business payment only.
-3. `POST /api/billing/mock-payment/[id]/complete` increases `paid_credits` by 600 and is idempotent.
-4. `POST /api/credits/balance` `type=consume amount=-8` deducts total by 8 and persists.
-5. `/api/works/demo/download` ZIP has required Commercial entries and legal README content.
-6. Truth pack separates legacy UI approval from Commercial MVP Stage 1 rejected/resubmission status.
-
-## Known limitations
-- Mock commercial flow only; no real payment provider.
-- Mock AI generation only; no real AI provider.
-- Server-side in-memory mock store only; no formal DB/Supabase.
+## Blocker evidence this round
+- SUPAGENT verification failed with stale cwd FileNotFoundError: /home/sport/WORK/AGENTS/01_選題池/sebastian/20260502_auto_sticker_pwa_ui_replan_v2
+- Controller exact D build: TIMEOUT/no output; no clean PASS evidence.
 
 
-## Cloud verification attached — 2026-05-12T23:34:46+08:00
-- cloud_url: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/
-- Vercel status: success.
-- `AUTO_STICKER_BASE_URL=https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app node --run acceptance:live`: PASS.
-- API probe before payment total: 624.
-- Mock payment create: status `created`, package `business`, credits `600`.
-- Mock payment complete: status `completed`, wallet total `1224`.
-- Balance after payment persisted: total `1224`.
-- Consume -8: wallet total `1216`, transaction balance_after total `1216`.
-- Balance after consume persisted: total `1216`.
-- Commercial ZIP: status `200`, content-type `application/zip`, magic `PK`.
-- Commercial ZIP entries: images/01.png, images/02.png, images/03.png, images/04.png, images/05.png, images/06.png, images/07.png, images/08.png, README.txt, line_sticker_info.json.
-- Page route table: 14/14 checked routes returned HTTP 200.
-
-
-## Latest rejected UI wallet split fix — 2026-05-13T08:42:56+08:00
-- Fixed `/create` localStorage/API split by moving create flow to `/api/credits/balance` and `/api/works`.
-- `/account`, `/billing`, `/create`, `/works`, `/works/[id]` now render or mutate the same API mock store.
-- Added `/api/demo/reset` for deterministic fresh demo verification; reset wallet total is 2 (< 8).
-- Added `/api/works/[id]` so browser/main flow can open newly created work detail from API state.
-- `node --run test`: PASS, `SUMMARY unit=15 api=26 e2e=18`.
-- `node --run acceptance:live`: PASS, `initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
-- `TEST_RESULT.md` now uses dual-status header; legacy APPROVED is historical only.
-- Stage 1 placeholder ZIP images remain disclosed; Stage 2 is not allowed on placeholders.
-
-
-## Final cloud verification — 2026-05-13T08:44:41+08:00
-- cloud_url: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/
-- Vercel commit status: success.
-- `AUTO_STICKER_BASE_URL=https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app node --run acceptance:live`: PASS.
-- Browser/API flow: `initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
-- Created work detail: `/works/[id]` route checked in acceptance.
-- Created work ZIP: `/api/works/[id]/download` returned `application/zip` and Commercial entries.
-- Demo ZIP: `/api/works/demo/download` returned `application/zip` with `images/01.png`–`08.png`, `README.txt`, `line_sticker_info.json`.
-- Legacy export ZIP remains secondary compatibility evidence only.
+## D package stale rejection fixed — 2026-05-13T21:14:40+08:00
+- Refreshed exact D package from source, excluding node_modules first, then repaired D node_modules by syncing source node_modules so required bins/files exist.
+- Added public D-safe build/start wrappers: `scripts/build-drvfs-safe.mjs`, `scripts/start-drvfs-safe.mjs`.
+- Exact D required files all present, including `lib/mock-store.ts`, billing mock-payment routes, works routes/download, updated `acceptance-live.mjs`, and dual-status `TEST_RESULT.md`.
+- Exact D public gates PASS:
+  - `NEXT_TELEMETRY_DISABLED=1 node --run build`: PASS.
+  - `node --run test`: PASS, `SUMMARY unit=15 api=26 e2e=18`.
+  - `node --run acceptance:live`: PASS, `initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
+- Commercial MVP Stage 1 remains not approved; Stage 2 remains disallowed.
+- No build.ready/delivery_id claimed this round.

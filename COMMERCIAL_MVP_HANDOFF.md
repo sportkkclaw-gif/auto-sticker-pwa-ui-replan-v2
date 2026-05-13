@@ -78,3 +78,15 @@ Ready for Simon QC resubmission after cloud redeploy/probe evidence is attached.
 - Created work ZIP: `/api/works/[id]/download` returned `application/zip` and Commercial entries.
 - Demo ZIP: `/api/works/demo/download` returned `application/zip` with `images/01.png`–`08.png`, `README.txt`, `line_sticker_info.json`.
 - Legacy export ZIP remains secondary compatibility evidence only.
+
+
+## D package stale rejection fixed — 2026-05-13T21:14:40+08:00
+- Refreshed exact D package from source, excluding node_modules first, then repaired D node_modules by syncing source node_modules so required bins/files exist.
+- Added public D-safe build/start wrappers: `scripts/build-drvfs-safe.mjs`, `scripts/start-drvfs-safe.mjs`.
+- Exact D required files all present, including `lib/mock-store.ts`, billing mock-payment routes, works routes/download, updated `acceptance-live.mjs`, and dual-status `TEST_RESULT.md`.
+- Exact D public gates PASS:
+  - `NEXT_TELEMETRY_DISABLED=1 node --run build`: PASS.
+  - `node --run test`: PASS, `SUMMARY unit=15 api=26 e2e=18`.
+  - `node --run acceptance:live`: PASS, `initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
+- Commercial MVP Stage 1 remains not approved; Stage 2 remains disallowed.
+- No build.ready/delivery_id claimed this round.

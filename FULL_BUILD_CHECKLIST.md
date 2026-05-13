@@ -1,6 +1,6 @@
 # FULL_BUILD_CHECKLIST.md — AUTO動態貼圖 PWA 重規劃完整建置清單
 
-updated_at: 2026-05-06T00:23:25+08:00
+updated_at: 2026-05-13T20:52:04+08:00
 
 ## P0
 - [x] 首頁 `/` 是手機 PWA 貼圖生成工作台，不是 dashboard。
@@ -26,3 +26,10 @@ updated_at: 2026-05-06T00:23:25+08:00
 - P0 remaining: 0
 - Hard Fail total: 4
 - Hard Fail cleared: 4
+## Returned must-fix / D public gate
+- [ ] Exact D package public gate clean-exits: `node --run build`, `node --run test`, and `node --run acceptance:live`.
+
+## Returned Gate Summary
+- Returned must-fix total: 1
+- Returned must-fix done: 0
+- Returned must-fix remaining: 1

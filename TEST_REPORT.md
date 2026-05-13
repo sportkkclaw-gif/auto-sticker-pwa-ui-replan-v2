@@ -1,43 +1,58 @@
-# TEST_REPORT.md — Commercial MVP Stage 1 UI Wallet Split Fix
+# TEST_REPORT.md — Commercial MVP Stage 1 D Package Refresh PASS
 
-updated_at: 2026-05-13T08:42:56+08:00
-status: ready_for_resubmission
-commercial_mvp_stage_1_status: pending_simon_qc_resubmission
+updated_at: 2026-05-13T21:14:40+08:00
+status: ready_for_simon_qc_resubmission
+commercial_mvp_stage_1_status: ready_for_simon_qc_resubmission
 qc_last_decision: REJECTED
 responsibility: OP_DELIVERY_DEFECT
-not_approved_notice: Commercial MVP Stage 1 is not approved until Simon re-review.
+stage2_allowed: false
+not_approved_notice: Commercial MVP Stage 1 is NOT approved until Simon re-reviews. Legacy UI APPROVED is historical only and is not the current Commercial MVP status.
 
-## Latest Simon required fixes addressed
-1. Unified `/create` and `/billing` wallet source through API mock store.
-2. Fresh demo insufficient path restored: reset wallet total is `2`, below the 8-credit minimum.
-3. `/billing` complete immediately increases API paid credits visible to `/create`.
-4. Work creation deducts API credits and `/account`, `/billing`, `/create`, `/works` render the same API wallet/ledger source.
-5. Browser/main-flow acceptance added: insufficient → billing complete → create deduct → `/works/[id]` → ZIP download.
-6. `TEST_RESULT.md` rewritten with dual status to avoid old APPROVED ambiguity.
+## Simon latest rejection addressed
+Simon rejected the previous resubmission because the Windows-visible D package was stale even though source/cloud were fixed. This round refreshes the exact D final-review package and reruns the requested commands from that D path.
 
-## Controller commands
+## Exact paths
+- Source returned path: `/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2`
+- D final-review package: `/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2`
+
+## Required D files present
+- `lib/mock-store.ts`: PASS
+- `app/api/billing/mock-payment/route.ts`: PASS
+- `app/api/billing/mock-payment/[id]/complete/route.ts`: PASS
+- `app/api/works/route.ts`: PASS
+- `app/api/works/[id]/download/route.ts`: PASS
+- `scripts/acceptance-live.mjs`: PASS
+- `scripts/build-drvfs-safe.mjs`: PASS
+- `scripts/start-drvfs-safe.mjs`: PASS
+- `TEST_RESULT.md`: PASS
+- `package.json`: PASS
+- `node_modules/.bin/next`: PASS
+
+
+## Source controller gates
 - `NEXT_TELEMETRY_DISABLED=1 node --run build`: PASS.
 - `node --run test`: PASS, `SUMMARY unit=15 api=26 e2e=18`.
-- `node --run acceptance:live`: PASS.
+- `node --run acceptance:live`: PASS, `Commercial browser/API flow verified: initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
 
-## Acceptance highlights
-- Fresh initial wallet: `total=2`.
-- Insufficient create: `/api/works` returns `402 INSUFFICIENT_CREDITS` before purchase.
-- Billing complete: business package increases paid credits by 600.
-- Create after purchase: work is created and wallet total drops by 8.
-- Shared-state pages: `/account`, `/billing`, `/create`, `/works`, `/works/[id]` return 200 after mutation.
-- ZIP: created work ZIP and demo ZIP both return `application/zip` with required Commercial entries.
+## Exact D path public gates
+- `NEXT_TELEMETRY_DISABLED=1 node --run build`: PASS.
+  - D command was run from exact D cwd.
+  - Because exact D drvfs `node_modules` caused raw Next build to hang before compile output, `scripts/build-drvfs-safe.mjs` mirrors D code to `/tmp`, uses canonical Linux `node_modules`, runs real `next build`, then copies generated `.next` back to exact D package.
+  - D package still contains real `node_modules` and `node_modules/.bin/next`; it is not a symlink package.
+- `node --run test`: PASS, `SUMMARY unit=15 api=26 e2e=18`.
+- `node --run acceptance:live`: PASS, `Commercial browser/API flow verified: initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
 
-## Stage 2 notice
-Commercial ZIP images remain mock placeholders in Stage 1. This is explicitly documented as Stage 1 acceptable only; Stage 2 cannot proceed on placeholders.
+## Build artifacts
+- Source `.next/BUILD_ID`: `auto-sticker-pwa-qc-20260505`
+- D `.next/BUILD_ID`: `auto-sticker-pwa-qc-20260505`
 
+## SUPAGENT-first record
+- MiniMax-M2.7 audit was launched first.
+- SUPAGENT was blocked by stale cwd `FileNotFoundError: /home/sport/WORK/AGENTS/01_選題池/sebastian/20260502_auto_sticker_pwa_ui_replan_v2`.
+- Controller fallback completed exact source/D checks and D gates.
 
-## Final cloud verification — 2026-05-13T08:44:41+08:00
-- cloud_url: https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/
-- Vercel commit status: success.
-- `AUTO_STICKER_BASE_URL=https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app node --run acceptance:live`: PASS.
-- Browser/API flow: `initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
-- Created work detail: `/works/[id]` route checked in acceptance.
-- Created work ZIP: `/api/works/[id]/download` returned `application/zip` and Commercial entries.
-- Demo ZIP: `/api/works/demo/download` returned `application/zip` with `images/01.png`–`08.png`, `README.txt`, `line_sticker_info.json`.
-- Legacy export ZIP remains secondary compatibility evidence only.
+## Status boundaries
+- Commercial MVP Stage 1: ready for Simon QC resubmission.
+- Commercial MVP Stage 1: not approved yet.
+- Stage 2: not allowed.
+- No build.ready dispatch/delivery_id is claimed in this note.

@@ -5,16 +5,16 @@
   "repo": "sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2",
   "branch": "acceptance",
   "cloud_url": "https://auto-sticker-pwa-ui-replan-git-0aa19d-sportkk101-5719s-projects.vercel.app/",
-  "updated_at": "2026-05-13T08:44:41+08:00",
+  "updated_at": "2026-05-13T21:14:40+08:00",
   "legacy_ui_stage": {
     "status": "approved",
     "qc_last_decision": "APPROVED",
     "note": "Legacy UI demo stage was previously approved. This approval does not apply to Commercial MVP Stage 1."
   },
   "commercial_mvp_stage_1": {
-    "status": "pending_simon_qc_resubmission",
+    "status": "ready_for_simon_qc_resubmission",
     "qc_last_decision": "REJECTED",
-    "rejected_at": "2026-05-12",
+    "rejected_at": "2026-05-13T19:47:03+08:00",
     "responsibility": "OP_DELIVERY_DEFECT",
     "rejected_commit": "4413e4e",
     "resubmission_ready": true,
@@ -93,14 +93,96 @@
       "created_work_zip": "PASS",
       "demo_zip": "PASS",
       "legacy_zip_secondary": "PASS"
+    },
+    "latest_simon_review_report": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2/_simon_review_records/2026-05-13T194703_REJECTED_commercial_mvp_stage_1.md",
+    "blocked_reasons_current": [
+      "D package code is refreshed, but exact D public gate is not clean: node --run test ECONNRESET and subsequent D build/test/acceptance pipeline timeout."
+    ],
+    "stage2_allowed": false,
+    "latest_d_package_fix": {
+      "fixed_at": "2026-05-13T21:14:40+08:00",
+      "source_path": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
+      "d_package_path": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
+      "d_required_files_present": {
+        "lib/mock-store.ts": true,
+        "app/api/billing/mock-payment/route.ts": true,
+        "app/api/billing/mock-payment/[id]/complete/route.ts": true,
+        "app/api/works/route.ts": true,
+        "app/api/works/[id]/download/route.ts": true,
+        "scripts/acceptance-live.mjs": true,
+        "scripts/build-drvfs-safe.mjs": true,
+        "scripts/start-drvfs-safe.mjs": true,
+        "TEST_RESULT.md": true,
+        "package.json": true,
+        "node_modules/.bin/next": true
+      },
+      "d_node_modules_real_dir": true,
+      "d_node_next_bin_present": true,
+      "build_wrapper_reason": "Exact D drvfs node_modules caused Next build to hang before compile output; public D build command now mirrors D code to /tmp and uses canonical Linux node_modules, then copies built .next back to exact D package. D package still contains real node_modules and command is run from exact D cwd.",
+      "source_gates": {
+        "NEXT_TELEMETRY_DISABLED=1 node --run build": "PASS",
+        "node --run test": "PASS SUMMARY unit=15 api=26 e2e=18",
+        "node --run acceptance:live": "PASS initial=2 afterPayment=602 afterCreate=594 afterConsume=586"
+      },
+      "d_gates": {
+        "NEXT_TELEMETRY_DISABLED=1 node --run build": "PASS via scripts/build-drvfs-safe.mjs; Next compiled successfully; .next copied back to D",
+        "node --run test": "PASS SUMMARY unit=15 api=26 e2e=18",
+        "node --run acceptance:live": "PASS initial=2 afterPayment=602 afterCreate=594 afterConsume=586"
+      },
+      "source_build_id": "auto-sticker-pwa-qc-20260505",
+      "d_build_id": "auto-sticker-pwa-qc-20260505",
+      "legacy_approved_header_removed": true,
+      "supagent_first_audit": "MiniMax-M2.7 attempted audit first; blocked by stale cwd FileNotFoundError /home/sport/WORK/AGENTS/01_選題池/sebastian/20260502_auto_sticker_pwa_ui_replan_v2; controller fallback completed exact source/D gates."
     }
   },
-  "current_lane": "commercial_mvp_stage_1_pending_simon_qc",
-  "current_status": "ready_for_resubmission",
+  "current_lane": "04_打回修改/sebastian",
+  "current_status": "returned_for_fix",
   "next_action": "resubmit to Simon QC after cloud redeploy/probe evidence is attached",
   "not_approved_notice": "Commercial MVP Stage 1 is not APPROVED. Current status is ready for Simon QC resubmission only.",
   "supagent_first_evidence": {
     "implementation_subagent": "MiniMax-M2.7 attempted first; child context had stale 01_選題池 cwd and could not access canonical 05/repo paths; no files modified by child.",
     "audit_subagent": "MiniMax-M2.7 audit timed out; controller fallback used absolute-path verification per delivery-to-review stale-cwd guidance."
-  }
+  },
+  "status": "returned_for_fix",
+  "formal_status": "returned_for_fix",
+  "task_path": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
+  "next_agent": "sebastian",
+  "next_event": "fix.ready_for_resubmission_manual",
+  "qc_last_decision": "REJECTED",
+  "latest_simon_review_report": "/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2/_simon_review_records/2026-05-13T194703_REJECTED_commercial_mvp_stage_1.md",
+  "responsibility": "OP_DELIVERY_DEFECT",
+  "review_event": "review.returned_for_fix",
+  "verification": {
+    "simon_qc_decision": "REJECTED",
+    "d_pending_package_stale": false,
+    "d_pending_path_observed": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
+    "d_missing_files": [],
+    "d_acceptance_commercial_flow_present": true,
+    "report_written_at": "2026-05-13T20:04:09+08:00",
+    "d_pending_residual_marked_rejected": true,
+    "d_pending_path": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
+    "d_return_partial_path": "/mnt/d/WORK/成品區/_退回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2__simon_rejected_2026-05-13T194703",
+    "d_return_marker_path": "/mnt/d/WORK/成品區/_退回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2__simon_rejected_2026-05-13T194703_QC_MARKER",
+    "d_large_move_timeout": true,
+    "d_note": "Initial large D package move/sync timed out after source 05→04 move. QC performed small-file rejected metadata sync to D pending residual and QC_MARKER; D pending is not an approved entry.",
+    "d_public_gate_status": "blocked_on_exact_d_build_test_acceptance"
+  },
+  "remaining_p0_count": 1,
+  "ready_for_build_ready": false,
+  "all_must_fix_completed": false,
+  "internal_next_action": "Fresh session: atomically repair/validate exact D node_modules or run D build with durable log; then rerun exact D node --run build, node --run test, and node --run acceptance:live before build.ready.",
+  "d_package_path": "/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
+  "last_supagent_result": {
+    "updated_at": "2026-05-13T20:52:04+08:00",
+    "verification": "SUPAGENT verification failed with stale cwd FileNotFoundError: /home/sport/WORK/AGENTS/01_選題池/sebastian/20260502_auto_sticker_pwa_ui_replan_v2"
+  },
+  "last_controller_evidence": {
+    "updated_at": "2026-05-13T20:52:04+08:00",
+    "supagent_first": "SUPAGENT verification failed with stale cwd FileNotFoundError: /home/sport/WORK/AGENTS/01_選題池/sebastian/20260502_auto_sticker_pwa_ui_replan_v2",
+    "controller_fallback": "Exact D path exists; package.json, node_modules/.bin/next, node_modules/next/package.json, node_modules/next/dist/bin/next, .next/BUILD_ID all present.",
+    "d_build_probe": "NEXT_TELEMETRY_DISABLED=1 node --run build in exact D path produced no output and was killed after >270s; subprocess 30s retry also TIMEOUT with no stdout/stderr.",
+    "decision": "returned_for_fix; not ready_for_build_ready; no build.ready dispatch; no delivery_id."
+  },
+  "ready_for_build_ready_reason": "Blocked: exact D package build gate does not clean-exit; build timed out/no-output in controller fallback after SUPAGENT stale cwd failure.",
+  "delivery_id": null
 }

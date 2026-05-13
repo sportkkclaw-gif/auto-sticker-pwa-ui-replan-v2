@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "node scripts/build-drvfs-safe.mjs",
+    "start": "node scripts/start-drvfs-safe.mjs",
     "lint": "next lint",
     "test": "node scripts/test-suite.mjs",
     "test:api": "node scripts/test-suite.mjs",
