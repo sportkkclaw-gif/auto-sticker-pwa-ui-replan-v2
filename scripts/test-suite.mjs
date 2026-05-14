@@ -29,7 +29,8 @@ async function startServer(){
   const startArgs = isDPackage ? ['--run','start'] : ['start'];
   const child = spawn(startCommand,startArgs,{cwd:root,env:{...process.env,PORT:port,NEXT_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe'],detached:true});
   let logs=''; child.stdout.on('data',d=>logs+=d); child.stderr.on('data',d=>logs+=d);
-  for(let i=0;i<60;i++){
+  const maxReadyAttempts = isDPackage ? 180 : 60;
+  for(let i=0;i<maxReadyAttempts;i++){
     try { const r = await fetch(`http://127.0.0.1:${port}/api/health`); if(r.status<500) return {child,base:`http://127.0.0.1:${port}`,logs}; } catch {}
     await delay(500);
     if(child.exitCode!==null) throw new Error('next start exited early: '+logs);
