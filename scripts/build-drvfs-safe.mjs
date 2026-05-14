@@ -14,7 +14,7 @@ if (!isDPackage || process.env.FORCE_NEXT_BUILD === '1') {
   run('node', ['node_modules/next/dist/bin/next', 'build']);
 } else {
   const task = cwd.split('/').filter(Boolean).pop();
-  const canonical = `/home/sport/WORK/AGENTS/04_打回修改/sebastian/${task}`;
+  const canonical = process.env.CANONICAL_SOURCE_PATH || '/home/sport/WORK/AGENTS/02_開發中/sebastian/20260502_auto_sticker_pwa_ui_replan_v2_stage2_owner_approved';
   const linuxNodeModules = existsSync(`${canonical}/node_modules/next/dist/bin/next`) ? `${canonical}/node_modules` : `${cwd}/node_modules`;
   const mirror = `/tmp/${task}-d-build-mirror`;
   console.log(`[D build wrapper] exact D cwd: ${cwd}`);

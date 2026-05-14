@@ -24,7 +24,10 @@ ok(existsSync('public/manifest.webmanifest') && existsSync('public/sw.js'), 'PWA
 ok(/不承諾 LINE 審核必過|不保證LINE審核通過|不保證 LINE 審核通過/.test(readFileSync('PRODUCT_SPEC.md','utf8') + readFileSync('app/export/page.tsx','utf8')), 'no LINE guaranteed-approval promise; disclaimer present');
 async function startServer(){
   const port = String(3300 + Math.floor(Math.random()*200));
-  const child = spawn('./node_modules/.bin/next',['start'],{cwd:root,env:{...process.env,PORT:port,NEXT_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe']});
+  const isDPackage = root.startsWith('/mnt/d/WORK/成品區/待最終審核/');
+  const startCommand = isDPackage ? 'node' : './node_modules/.bin/next';
+  const startArgs = isDPackage ? ['--run','start'] : ['start'];
+  const child = spawn(startCommand,startArgs,{cwd:root,env:{...process.env,PORT:port,NEXT_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe'],detached:true});
   let logs=''; child.stdout.on('data',d=>logs+=d); child.stderr.on('data',d=>logs+=d);
   for(let i=0;i<60;i++){
     try { const r = await fetch(`http://127.0.0.1:${port}/api/health`); if(r.status<500) return {child,base:`http://127.0.0.1:${port}`,logs}; } catch {}
@@ -80,6 +83,9 @@ try{
   r = await jsonFetch(base,'/api/pwa/install-event',{method:'POST',body:JSON.stringify({platform:'ios',event:'installed'})}); ok(r.status===200 && r.body.pwaEvent.platform==='ios', 'PWA install event API works','api');
   for (const page of ['/', '/create', '/preview', '/export', '/works']) { const pr = await fetch(base+page); ok(pr.status===200, `page ${page} renders`, 'e2e'); }
   ok(true, 'create→upload→crop→generate→QC→export ZIP roundtrip passed', 'e2e');
-} finally { child.kill('SIGKILL'); await delay(300); }
+} finally {
+  try { process.kill(-child.pid, 'SIGKILL'); } catch { try { child.kill('SIGKILL'); } catch {} }
+  await delay(300);
+}
 console.log(`SUMMARY unit=${unit} api=${api} e2e=${e2e}`);
 assert.ok(unit>=12 && api>=12 && e2e>=5, 'required test counts met');
