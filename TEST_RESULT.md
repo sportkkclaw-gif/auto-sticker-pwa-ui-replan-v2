@@ -1,58 +1,43 @@
-# TEST_RESULT.md — Commercial MVP Stage 1 D Package Refresh PASS
+# TEST_RESULT — AUTO 動態貼圖 Stage 2 bounded sync
 
-updated_at: 2026-05-13T21:14:40+08:00
-status: ready_for_simon_qc_resubmission
-commercial_mvp_stage_1_status: ready_for_simon_qc_resubmission
-qc_last_decision: REJECTED
-responsibility: OP_DELIVERY_DEFECT
-stage2_allowed: false
-not_approved_notice: Commercial MVP Stage 1 is NOT approved until Simon re-reviews. Legacy UI APPROVED is historical only and is not the current Commercial MVP status.
+updated_at: 2026-05-19T22:32:42+08:00
+current_status: stage2_bounded_approval_closed
+current_lane: 05_驗收通過/sebastian
 
-## Simon latest rejection addressed
-Simon rejected the previous resubmission because the Windows-visible D package was stale even though source/cloud were fixed. This round refreshes the exact D final-review package and reruns the requested commands from that D path.
+## Current verdict
 
-## Exact paths
-- Source returned path: `/home/sport/WORK/AGENTS/04_打回修改/sebastian/20260502_auto_sticker_pwa_ui_replan_v2`
-- D final-review package: `/mnt/d/WORK/成品區/待最終審核/sebastian/20260502_auto_sticker_pwa_ui_replan_v2`
+- Commercial MVP Stage 1: APPROVED
+- Commercial MVP Stage 2: APPROVED - bounded mock_non_placeholder scope
 
-## Required D files present
-- `lib/mock-store.ts`: PASS
-- `app/api/billing/mock-payment/route.ts`: PASS
-- `app/api/billing/mock-payment/[id]/complete/route.ts`: PASS
-- `app/api/works/route.ts`: PASS
-- `app/api/works/[id]/download/route.ts`: PASS
-- `scripts/acceptance-live.mjs`: PASS
-- `scripts/build-drvfs-safe.mjs`: PASS
-- `scripts/start-drvfs-safe.mjs`: PASS
-- `TEST_RESULT.md`: PASS
-- `package.json`: PASS
-- `node_modules/.bin/next`: PASS
+## Stage 2 approved checks
 
+The bounded Stage 2 scope verifies:
 
-## Source controller gates
-- `NEXT_TELEMETRY_DISABLED=1 node --run build`: PASS.
-- `node --run test`: PASS, `SUMMARY unit=15 api=26 e2e=18`.
-- `node --run acceptance:live`: PASS, `Commercial browser/API flow verified: initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
+- actual created work flow
+- generation_job records
+- generated_images records
+- non-placeholder ZIP output
+- generation_manifest.json
+- API image sha256 equals ZIP image sha256 equals manifest sha256
+- credit reserve to commit
+- reserve to refund once
+- retry with attempt_no plus one
+- no double-charge
+- no double-refund
+- cloud acceptance rerunnable
 
-## Exact D path public gates
-- `NEXT_TELEMETRY_DISABLED=1 node --run build`: PASS.
-  - D command was run from exact D cwd.
-  - Because exact D drvfs `node_modules` caused raw Next build to hang before compile output, `scripts/build-drvfs-safe.mjs` mirrors D code to `/tmp`, uses canonical Linux `node_modules`, runs real `next build`, then copies generated `.next` back to exact D package.
-  - D package still contains real `node_modules` and `node_modules/.bin/next`; it is not a symlink package.
-- `node --run test`: PASS, `SUMMARY unit=15 api=26 e2e=18`.
-- `node --run acceptance:live`: PASS, `Commercial browser/API flow verified: initial=2 afterPayment=602 afterCreate=594 afterConsume=586`.
+## Explicit limits
 
-## Build artifacts
-- Source `.next/BUILD_ID`: `auto-sticker-pwa-qc-20260505`
-- D `.next/BUILD_ID`: `auto-sticker-pwa-qc-20260505`
+- live AI provider is not approved
+- live payment capture is not approved
+- formal DB is not approved
+- commercial launch is not ready
+- Stage 3 is not started
 
-## SUPAGENT-first record
-- MiniMax-M2.7 audit was launched first.
-- SUPAGENT was blocked by stale cwd `FileNotFoundError: /home/sport/WORK/AGENTS/01_選題池/sebastian/20260502_auto_sticker_pwa_ui_replan_v2`.
-- Controller fallback completed exact source/D checks and D gates.
+## Sync scope
 
-## Status boundaries
-- Commercial MVP Stage 1: ready for Simon QC resubmission.
-- Commercial MVP Stage 1: not approved yet.
-- Stage 2: not allowed.
-- No build.ready dispatch/delivery_id is claimed in this note.
+This file update is docs/truth-pack only. It does not change app code, API routes, UI components, package scripts, or runtime logic.
+
+## Next action
+
+Awaiting owner decision for next phase.
