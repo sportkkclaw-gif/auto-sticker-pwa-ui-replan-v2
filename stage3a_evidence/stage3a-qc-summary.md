@@ -1,11 +1,11 @@
 # Stage 3A QC Summary
 
-- timestamp: 2026-05-20T12:47:32.914Z
+- timestamp: 2026-05-20T13:12:24.036Z
 - repo: sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2
 - branch: feature/stage3a-fal-provider-pilot
 - commit: local
-- work_id: work_2dd2b79b5df0e59416
-- generation_job_id: job_2e427a868107f0dc5b
+- work_id: work_827af362155dda75d7
+- generation_job_id: job_cacf6d39c27e6d1261
 - provider: fal.ai
 - config_blocked path: PASS
 - provider success path: SKIPPED_NO_OWNER_ENABLE
