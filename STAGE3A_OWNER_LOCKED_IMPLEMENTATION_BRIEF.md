@@ -263,3 +263,9 @@ Do not claim:
 ## Final status
 
 Stage 3A owner-locked implementation brief ready for owner review.
+
+## PR #2 safety fix note
+
+Current implementation validates provider-safety scaffold, config_blocked, budget_blocked, fallback evidence, secret scan, and cost cap.
+It does not yet validate real fal.ai output bytes.
+Provider success remains SKIPPED until a real provider call downloads provider bytes and hashes them.

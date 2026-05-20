@@ -14,7 +14,7 @@
 - Not live AI
 - Not live payment
 - Not formal DB
-- Not commercial launch ready
+- Not commercial launch readiness
 
 ### Sync scope
 - Truth pack / docs only

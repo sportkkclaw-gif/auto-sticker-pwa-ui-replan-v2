@@ -8,6 +8,7 @@ export type Stage3AProviderAttemptStatus =
   | 'timeout'
   | 'partial'
   | 'fallback_used'
+  | 'provider_not_implemented'
   | 'config_blocked'
   | 'budget_blocked';
 
@@ -135,17 +136,24 @@ export function createProviderGenerationAttempt(input: Stage3AProviderInput): St
   }
   return {
     provider: 'fal.ai',
-    provider_job_id: `fal_job_${stage3aSha256(requestId).slice(0, 16)}`,
+    provider_job_id: null,
     request_id: requestId,
-    provider_request_id: `fal_req_${stage3aSha256(`${requestId}:${input.model}`).slice(0, 16)}`,
+    provider_request_id: null,
     model: config.model,
-    status: 'queued',
+    status: 'provider_not_implemented',
     latency_ms: 0,
     cost_estimate_usd: 0,
-    fallback_used: false,
-    fallback_reason: null,
-    refund_credits: 0,
-    redacted_metadata: { provider: 'fal.ai', mode: 'provider_pilot', key_present: true },
+    fallback_used: true,
+    fallback_reason: 'provider_not_implemented',
+    refund_credits: input.image_count,
+    redacted_metadata: {
+      provider: 'fal.ai',
+      mode: 'provider_pilot_scaffold',
+      key_present: true,
+      model_present: true,
+      no_live_call: true,
+      provider_bytes_received: false,
+    },
     outputs: [],
   };
 }
