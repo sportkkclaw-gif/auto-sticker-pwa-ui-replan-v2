@@ -252,11 +252,11 @@ Each artifact must include:
 Do not claim:
 
 - Stage 3A development started
-- Stage 3A approved
-- Live AI approved
+- Stage 3A owner approval completed
+- Live AI owner approval completed
 - Live payment approved
 - Formal DB approved
-- Commercial launch ready
+- Commercial launch readiness
 - Production deployment allowed
 - PR merged
 

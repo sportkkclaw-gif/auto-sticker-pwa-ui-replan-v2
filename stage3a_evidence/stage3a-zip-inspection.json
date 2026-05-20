@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-05-20T13:12:24.023Z",
+  "timestamp": "2026-05-20T13:19:40.162Z",
   "repo": "sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2",
   "branch": "feature/stage3a-fal-provider-pilot",
   "commit": "local",
-  "work_id": "work_827af362155dda75d7",
-  "generation_job_id": "job_cacf6d39c27e6d1261",
+  "work_id": "work_c190b66a209de0ce5d",
+  "generation_job_id": "job_71958c5318a3c99500",
   "provider": "fal.ai",
   "provider_job_id": null,
   "fallback_reason": "config_blocked",
   "prompt_hash": "3a60bc85392f6bdd7af82fda9e8bd6d074fc5b5faee119548982a21753b77137",
   "input_hash": "498ef9fc4aef39de5e2fc8c0c7a81f4c8a1dc71d12cc18dc3a61d1aaa84034ab",
-  "output_hash": "9dec7a9d76bf3e471313252b0398cd8bdb2ca9ebc223e73023ac9d4d46e552aa",
+  "output_hash": "2620b8e5a3223028c7dde490034af81b61f393183ba51eacedafe88685d51149",
   "no_secrets": true,
   "entries": [
     "images/01.png",
@@ -26,6 +26,6 @@
     "generation_manifest.json",
     "provider_evidence.json"
   ],
-  "zip_sha256": "4ac28a22890313514697f9bfb15bb68331330d0600e93aaf4b64a6fe9986deea",
-  "provider_evidence_sha256": "0ba8e23e342609561eb967566cbfe3969623260f7ed4c9b2b2833dfdf4e03add"
+  "zip_sha256": "1ccf69591219bb298ad46dd2d9641ae502f033e3840b9bd7852a6fd060da3282",
+  "provider_evidence_sha256": "bad08b10004019129be0eade280afd718a0318eb36b074483c25e8a7a87a0b29"
 }

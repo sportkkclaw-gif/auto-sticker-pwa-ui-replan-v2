@@ -98,7 +98,7 @@ try{
   saveStage2('stage2-zip-inspection.json', { content_type:zipRes.contentType, bytes:zip.length, magic:zip.subarray(0,2).toString('ascii'), entries:Object.keys(files).sort() }, { work_id:workId, generation_job_id:jobId });
   saveStage2('stage2-generation-manifest.json', manifest, { work_id:workId, generation_job_id:jobId, image_hashes:manifest.generated_images?.map(i=>i.sha256) });
   saveStage2('stage2-hash-comparison.json', hashComparison, { work_id:workId, generation_job_id:jobId, image_hashes:hashComparison.map(i=>i.zip_sha256) });
-  save(cloudMode ? 'stage2-cloud-qc-summary.md' : 'stage2-qc-summary.md', `# Stage 2 QC Summary\n\n- API create/detail/job/generated-images/download: PASS\n- ZIP entries: PASS\n- Hash comparison API vs manifest vs ZIP: PASS\n- Credit semantics reserve/commit/refund/retry: PASS\n- Provider mode: mock_non_placeholder\n- Stage 2 approved: NO\n- Commercial launch ready: NO\n`);
+  save(cloudMode ? 'stage2-cloud-qc-summary.md' : 'stage2-qc-summary.md', `# Stage 2 QC Summary\n\n- API create/detail/job/generated-images/download: PASS\n- ZIP entries: PASS\n- Hash comparison API vs manifest vs ZIP: PASS\n- Credit semantics reserve/commit/refund/retry: PASS\n- Provider mode: mock_non_placeholder\n- Stage 2 approved: NO\n- Commercial launch readiness: NO\n`);
   console.log('STAGE2_ACCEPTANCE PASS', JSON.stringify({workId,jobId,evidenceDir,hashes:hashComparison.length}));
 } finally {
   if (!cloudMode) save('stage2-cloud-api-transcript.json', transcript); else save('stage2-cloud-api-transcript.json', { ...meta(), payload:transcript });
