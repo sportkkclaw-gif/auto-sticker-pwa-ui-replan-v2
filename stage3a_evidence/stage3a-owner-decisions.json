@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-05-20T12:47:32.897Z",
+  "repo": "sportkkclaw-gif/auto-sticker-pwa-ui-replan-v2",
+  "branch": "feature/stage3a-fal-provider-pilot",
+  "commit": "local",
+  "work_id": "work_2dd2b79b5df0e59416",
+  "generation_job_id": "job_2e427a868107f0dc5b",
+  "provider": "fal.ai",
+  "provider_job_id": null,
+  "fallback_reason": "config_blocked",
+  "prompt_hash": "3a60bc85392f6bdd7af82fda9e8bd6d074fc5b5faee119548982a21753b77137",
+  "input_hash": "498ef9fc4aef39de5e2fc8c0c7a81f4c8a1dc71d12cc18dc3a61d1aaa84034ab",
+  "output_hash": "d4d4005e3c2ca875b9afe5b5acd7942cadbcca9b832cd0af4b7de8f993f8df53",
+  "no_secrets": true,
+  "provider_candidate_locked_for_pilot": "fal.ai",
+  "live_payment": false,
+  "formal_db": false,
+  "production_deploy": false
+}

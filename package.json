@@ -12,7 +12,8 @@
     "run": "npm run build",
     "run:dev": "npm run dev",
     "acceptance:live": "node scripts/acceptance-live.mjs",
-    "acceptance:stage2": "node scripts/stage2-acceptance.mjs"
+    "acceptance:stage2": "node scripts/stage2-acceptance.mjs",
+    "acceptance:stage3a": "tsx scripts/stage3a-acceptance.mjs"
   },
   "dependencies": {
     "next": "^15.1.0",
@@ -20,11 +21,12 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "typescript": "^5.7.0",
     "jest": "^29.7.0",
-    "@types/jest": "^29.5.0"
+    "tsx": "^4.22.3",
+    "typescript": "^5.7.0"
   }
 }
