@@ -25,8 +25,8 @@ ok(/不承諾 LINE 審核必過|不保證LINE審核通過|不保證 LINE 審核�
 async function startServer(){
   const port = String(3300 + Math.floor(Math.random()*200));
   const isDPackage = root.startsWith('/mnt/d/WORK/成品區/待最終審核/');
-  const startCommand = isDPackage ? 'node' : './node_modules/.bin/next';
-  const startArgs = isDPackage ? ['--run','start'] : ['start'];
+  const startCommand = (isDPackage || process.platform === 'win32') ? 'node' : './node_modules/.bin/next';
+  const startArgs = isDPackage ? ['--run','start'] : (process.platform === 'win32' ? ['node_modules/next/dist/bin/next','start'] : ['start']);
   const child = spawn(startCommand,startArgs,{cwd:root,env:{...process.env,PORT:port,NEXT_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe'],detached:true});
   let logs=''; child.stdout.on('data',d=>logs+=d); child.stderr.on('data',d=>logs+=d);
   const maxReadyAttempts = isDPackage ? 180 : 60;

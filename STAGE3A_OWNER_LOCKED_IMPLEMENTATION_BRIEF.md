@@ -252,14 +252,20 @@ Each artifact must include:
 Do not claim:
 
 - Stage 3A development started
-- Stage 3A approved
-- Live AI approved
+- Stage 3A owner approval completed
+- Live AI owner approval completed
 - Live payment approved
 - Formal DB approved
-- Commercial launch ready
+- Commercial launch readiness
 - Production deployment allowed
 - PR merged
 
 ## Final status
 
 Stage 3A owner-locked implementation brief ready for owner review.
+
+## PR #2 safety fix note
+
+Current implementation validates provider-safety scaffold, config_blocked, budget_blocked, fallback evidence, secret scan, and cost cap.
+It does not yet validate real fal.ai output bytes.
+Provider success remains SKIPPED until a real provider call downloads provider bytes and hashes them.

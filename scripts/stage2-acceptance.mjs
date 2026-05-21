@@ -6,7 +6,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 
 const evidenceDir = process.env.STAGE2_EVIDENCE_DIR || join(process.cwd(), 'stage2_evidence');
 mkdirSync(evidenceDir, { recursive: true });
-const port = process.env.PORT || String(3600 + Math.floor(Math.random()*300));
+const port = process.env.PORT || String(4100 + Math.floor(Math.random()*300));
 const base = process.env.BASE_URL || process.env.AUTO_STICKER_BASE_URL || `http://127.0.0.1:${port}`;
 let child;
 let transcript = [];
@@ -47,7 +47,7 @@ try{
   const insufficient = await request('/api/works', 402, { method:'POST', body:JSON.stringify({ title:'insufficient', prompt:'cute', image_count:8 }) });
   assert(insufficient.body.error === 'INSUFFICIENT_CREDITS', 'fresh wallet must be insufficient');
   await request('/api/stage2/fund', 200, { method:'POST', body:JSON.stringify({ amount:80, description:'acceptance funding' }) });
-  const createBody = { title:'Stage 2 acceptance', template_id:'tpl_001', prompt:'可愛貓咪 LINE 貼圖 eight emotions', image_count:8, output_kind:'static_sticker' };
+  const createBody = { title:'Stage 2 acceptance', template_id:'tpl_001', prompt:'?��?貓咪 LINE 貼�? eight emotions', image_count:8, output_kind:'static_sticker' };
   const created = await request('/api/works', 201, { method:'POST', headers:{'idempotency-key':'stage2-success-001'}, body:JSON.stringify(createBody) });
   assert(created.body.work && created.body.generation_job && created.body.transaction.type==='generation_reserve', 'create returns work/job/reserve');
   assert(created.body.commit_transaction.type === 'generation_commit', 'success path commits reserve');
@@ -98,7 +98,7 @@ try{
   saveStage2('stage2-zip-inspection.json', { content_type:zipRes.contentType, bytes:zip.length, magic:zip.subarray(0,2).toString('ascii'), entries:Object.keys(files).sort() }, { work_id:workId, generation_job_id:jobId });
   saveStage2('stage2-generation-manifest.json', manifest, { work_id:workId, generation_job_id:jobId, image_hashes:manifest.generated_images?.map(i=>i.sha256) });
   saveStage2('stage2-hash-comparison.json', hashComparison, { work_id:workId, generation_job_id:jobId, image_hashes:hashComparison.map(i=>i.zip_sha256) });
-  save(cloudMode ? 'stage2-cloud-qc-summary.md' : 'stage2-qc-summary.md', `# Stage 2 QC Summary\n\n- API create/detail/job/generated-images/download: PASS\n- ZIP entries: PASS\n- Hash comparison API vs manifest vs ZIP: PASS\n- Credit semantics reserve/commit/refund/retry: PASS\n- Provider mode: mock_non_placeholder\n- Stage 2 approved: NO\n- Commercial launch ready: NO\n`);
+  save(cloudMode ? 'stage2-cloud-qc-summary.md' : 'stage2-qc-summary.md', `# Stage 2 QC Summary\n\n- API create/detail/job/generated-images/download: PASS\n- ZIP entries: PASS\n- Hash comparison API vs manifest vs ZIP: PASS\n- Credit semantics reserve/commit/refund/retry: PASS\n- Provider mode: mock_non_placeholder\n- Stage 2 approved: NO\n- Commercial launch readiness: NO\n`);
   console.log('STAGE2_ACCEPTANCE PASS', JSON.stringify({workId,jobId,evidenceDir,hashes:hashComparison.length}));
 } finally {
   if (!cloudMode) save('stage2-cloud-api-transcript.json', transcript); else save('stage2-cloud-api-transcript.json', { ...meta(), payload:transcript });
