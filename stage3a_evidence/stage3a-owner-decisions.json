@@ -1,0 +1,13 @@
+{
+  "provider": "openai",
+  "provider_name": "OpenAI Images API",
+  "mode": "provider_pilot",
+  "max_jobs": 1,
+  "images_per_job": 8,
+  "production_deploy": false,
+  "live_payment": false,
+  "formal_db": false,
+  "commercial_launch_ready": false,
+  "stage3a_approved": false,
+  "default_stage3a_enable_provider_false": false
+}

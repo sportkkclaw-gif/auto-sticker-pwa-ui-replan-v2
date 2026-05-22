@@ -1,0 +1,22 @@
+# Stage 3A OpenAI Images Provider Pilot QC Summary
+
+- provider_success_status: PASS
+- provider: openai
+- provider_name: OpenAI Images API
+- model: gpt-image-1
+- generated_images_count: 8
+- real_provider_output_count: 8
+- fallback_image_count: 0
+- request_id: req_8bbd49f80fae4cceb17e213bb51e128e
+- provider_request_id: req_8bbd49f80fae4cceb17e213bb51e128e,req_501593da957b46f99b3e74c35860ce46
+- response_id: N/A
+- output_hash: 81554c25fbe8ebe30be3e2c4bd71fbdad186a1263954792aa35ae2cd0bbd2cb9
+- zip_hash: 54d2fc50e0f1df59b3868d13d2dccfe3e1ba00f11c2ee337b658cb17c6d21e97
+- manifest_hash: ec603adf26e162b712e2cb6c5d344a0c755f6851db0d31468c37373ba41e2d63
+- hash_comparison: PASS
+- secret_scan: PASS
+- production_deploy: NO
+- live_payment: NO
+- formal_db: NO
+- pr_merge: NO
+- simon_handoff: NO

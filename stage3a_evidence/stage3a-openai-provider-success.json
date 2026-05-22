@@ -1,0 +1,35 @@
+{
+  "provider": "openai",
+  "provider_name": "OpenAI Images API",
+  "model": "gpt-image-1",
+  "request_id": "req_8bbd49f80fae4cceb17e213bb51e128e",
+  "provider_request_id": "req_8bbd49f80fae4cceb17e213bb51e128e,req_501593da957b46f99b3e74c35860ce46",
+  "response_id": null,
+  "generated_images_count": 8,
+  "real_provider_output_count": 8,
+  "fallback_image_count": 0,
+  "output_hash": "81554c25fbe8ebe30be3e2c4bd71fbdad186a1263954792aa35ae2cd0bbd2cb9",
+  "image_hashes": [
+    "fd3cc6d1d0f262c5c5cf9aca77b1d4124a2a113c6eb1290ef36d6434d5b088c9",
+    "0cd28bf29eda387d7f25ba4274a0a0a5c64032111351954b97c499d3438a14e5",
+    "01d79554b7bcb44501bdb1ea03fad8737c941e0005faeee91f7e0479de7749f7",
+    "ee1a3fa5a2e928b731be911435de03a49327a3ed348bc568f77851c5673bb1cf",
+    "0f73374b04ab23e16b76d0d686ce215d02d9c28c6eccdf6a6ba32c53af1c249a",
+    "e4e3ed0c263224d07ce85e70c2ddce06a961b933bf3769dabfb33ae569ee0b25",
+    "7c17b39224a30c44228c29011d0d6f688be4df5d9e5d3fadae8d9812044c777e",
+    "e493b766a6f8ab8c9493517f286861cde0a2d6399b5bd31aa5ea6176162eb6e0"
+  ],
+  "zip_hash": "54d2fc50e0f1df59b3868d13d2dccfe3e1ba00f11c2ee337b658cb17c6d21e97",
+  "manifest_hash": "ec603adf26e162b712e2cb6c5d344a0c755f6851db0d31468c37373ba41e2d63",
+  "cost_estimate": {
+    "currency": "USD",
+    "estimated_total_usd": 0.32,
+    "cap_usd": 2.5,
+    "estimate_only": true,
+    "unit_estimate_usd": 0.04
+  },
+  "no_secrets": true,
+  "work_id": "work_e9eaa7f68aea1d053e",
+  "generation_job_id": "job_f9f2b8e8187475ac00",
+  "zip_path": "stage3a_evidence\\work_e9eaa7f68aea1d053e-stage3a-line-stickers.zip"
+}

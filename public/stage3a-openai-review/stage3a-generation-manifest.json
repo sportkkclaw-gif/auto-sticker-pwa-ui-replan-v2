@@ -1,0 +1,154 @@
+{
+  "work_id": "work_e9eaa7f68aea1d053e",
+  "generation_job_id": "job_f9f2b8e8187475ac00",
+  "provider": "openai",
+  "provider_name": "OpenAI Images API",
+  "provider_evidence": {
+    "provider": "openai",
+    "provider_name": "OpenAI Images API",
+    "model": "gpt-image-1",
+    "request_id": "req_8bbd49f80fae4cceb17e213bb51e128e",
+    "provider_request_id": "req_8bbd49f80fae4cceb17e213bb51e128e,req_501593da957b46f99b3e74c35860ce46",
+    "response_id": null,
+    "provider_attempt_status": "completed",
+    "latency_ms": 170416,
+    "generated_images_count": 8,
+    "real_provider_output_count": 8,
+    "fallback_image_count": 0,
+    "source_summary": {
+      "provider": 8,
+      "fallback": 0
+    },
+    "cost_estimate": {
+      "currency": "USD",
+      "estimated_total_usd": 0.32,
+      "cap_usd": 2.5,
+      "estimate_only": true,
+      "unit_estimate_usd": 0.04
+    },
+    "reserve": {
+      "attempted": true,
+      "transaction_id": "tx_fe21a96329ad"
+    },
+    "commit": {
+      "attempted": true,
+      "transaction_id": "tx_7c5f0ffa5f3b"
+    },
+    "refund": {
+      "attempted": false,
+      "transaction_id": null
+    },
+    "no_double_charge": true,
+    "no_double_refund": true,
+    "no_secrets": true,
+    "error": null
+  },
+  "input_image_hash": "0f8da253131ccdec6b2d02fe3407f32c27157aebb82cadcda31ba33aadbf6117",
+  "prompt_hash": "1d1e803cce49f2be6913104bc992a1591ab46e3c4fb40888cfab69bf2e19a1c7",
+  "generated_images": [
+    {
+      "index": 1,
+      "zip_path": "images/01.png",
+      "sha256": "fd3cc6d1d0f262c5c5cf9aca77b1d4124a2a113c6eb1290ef36d6434d5b088c9",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1658680,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    },
+    {
+      "index": 2,
+      "zip_path": "images/02.png",
+      "sha256": "0cd28bf29eda387d7f25ba4274a0a0a5c64032111351954b97c499d3438a14e5",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1678305,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    },
+    {
+      "index": 3,
+      "zip_path": "images/03.png",
+      "sha256": "01d79554b7bcb44501bdb1ea03fad8737c941e0005faeee91f7e0479de7749f7",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1628843,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    },
+    {
+      "index": 4,
+      "zip_path": "images/04.png",
+      "sha256": "ee1a3fa5a2e928b731be911435de03a49327a3ed348bc568f77851c5673bb1cf",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1486362,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    },
+    {
+      "index": 5,
+      "zip_path": "images/05.png",
+      "sha256": "0f73374b04ab23e16b76d0d686ce215d02d9c28c6eccdf6a6ba32c53af1c249a",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1763385,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    },
+    {
+      "index": 6,
+      "zip_path": "images/06.png",
+      "sha256": "e4e3ed0c263224d07ce85e70c2ddce06a961b933bf3769dabfb33ae569ee0b25",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1739545,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    },
+    {
+      "index": 7,
+      "zip_path": "images/07.png",
+      "sha256": "7c17b39224a30c44228c29011d0d6f688be4df5d9e5d3fadae8d9812044c777e",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1531791,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    },
+    {
+      "index": 8,
+      "zip_path": "images/08.png",
+      "sha256": "e493b766a6f8ab8c9493517f286861cde0a2d6399b5bd31aa5ea6176162eb6e0",
+      "width": 1024,
+      "height": 1024,
+      "byte_size": 1602747,
+      "source": "provider",
+      "is_real_provider_output": true,
+      "provider": "openai",
+      "provider_name": "OpenAI Images API",
+      "provider_image_id": null
+    }
+  ]
+}
