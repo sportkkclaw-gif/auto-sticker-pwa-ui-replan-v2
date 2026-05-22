@@ -1,0 +1,21 @@
+{
+  "zip_path": "stage3a_evidence\\work_e9eaa7f68aea1d053e-stage3a-line-stickers.zip",
+  "entries": [
+    "images/01.png",
+    "images/02.png",
+    "images/03.png",
+    "images/04.png",
+    "images/05.png",
+    "images/06.png",
+    "images/07.png",
+    "images/08.png",
+    "README.txt",
+    "line_sticker_info.json",
+    "generation_manifest.json",
+    "provider_evidence.json"
+  ],
+  "image_count": 8,
+  "contains_provider_evidence": true,
+  "contains_manifest": true,
+  "zip_magic": "PK"
+}

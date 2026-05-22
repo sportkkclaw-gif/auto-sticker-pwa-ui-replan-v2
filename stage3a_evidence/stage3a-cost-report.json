@@ -1,0 +1,23 @@
+{
+  "cost_estimate": {
+    "currency": "USD",
+    "estimated_total_usd": 0.32,
+    "cap_usd": 2.5,
+    "estimate_only": true,
+    "unit_estimate_usd": 0.04
+  },
+  "reserve": {
+    "attempted": true,
+    "transaction_id": "tx_fe21a96329ad"
+  },
+  "commit": {
+    "attempted": true,
+    "transaction_id": "tx_7c5f0ffa5f3b"
+  },
+  "refund": {
+    "attempted": false,
+    "transaction_id": null
+  },
+  "no_double_charge": true,
+  "no_double_refund": true
+}

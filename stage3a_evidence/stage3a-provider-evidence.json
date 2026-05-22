@@ -1,0 +1,40 @@
+{
+  "provider": "openai",
+  "provider_name": "OpenAI Images API",
+  "model": "gpt-image-1",
+  "request_id": "req_8bbd49f80fae4cceb17e213bb51e128e",
+  "provider_request_id": "req_8bbd49f80fae4cceb17e213bb51e128e,req_501593da957b46f99b3e74c35860ce46",
+  "response_id": null,
+  "provider_attempt_status": "completed",
+  "latency_ms": 170416,
+  "generated_images_count": 8,
+  "real_provider_output_count": 8,
+  "fallback_image_count": 0,
+  "source_summary": {
+    "provider": 8,
+    "fallback": 0
+  },
+  "cost_estimate": {
+    "currency": "USD",
+    "estimated_total_usd": 0.32,
+    "cap_usd": 2.5,
+    "estimate_only": true,
+    "unit_estimate_usd": 0.04
+  },
+  "reserve": {
+    "attempted": true,
+    "transaction_id": "tx_fe21a96329ad"
+  },
+  "commit": {
+    "attempted": true,
+    "transaction_id": "tx_7c5f0ffa5f3b"
+  },
+  "refund": {
+    "attempted": false,
+    "transaction_id": null
+  },
+  "no_double_charge": true,
+  "no_double_refund": true,
+  "no_secrets": true,
+  "error": null
+}
