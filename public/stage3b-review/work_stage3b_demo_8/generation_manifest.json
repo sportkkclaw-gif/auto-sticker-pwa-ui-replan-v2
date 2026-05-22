@@ -1,0 +1,261 @@
+{
+  "stage": "3B",
+  "work_id": "work_stage3b_demo_8",
+  "generated_images_count": 8,
+  "independent_png_count": 8,
+  "grid_collage_output": false,
+  "zip_path": "/stage3b-review/work_stage3b_demo_8/stage3b-line-stickers.zip",
+  "generated_images": [
+    {
+      "index": 1,
+      "zip_path": "images/01.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/01.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4466,
+      "sha256": "5b1a256215de7590912530075ae48d02faffacb0f54eb09dff38ac9dfad31001",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6647,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.1953,
+        "right": 0.1934,
+        "top": 0.1602,
+        "bottom": 0.1621
+      },
+      "subject_bbox": {
+        "left": 100,
+        "top": 82,
+        "right": 412,
+        "bottom": 428
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    },
+    {
+      "index": 2,
+      "zip_path": "images/02.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/02.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4348,
+      "sha256": "333f2ff3e9b99f866f665688a9d3028845c78a14c25142163271917a9dba674b",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6738,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.1797,
+        "right": 0.1777,
+        "top": 0.1855,
+        "bottom": 0.1875
+      },
+      "subject_bbox": {
+        "left": 92,
+        "top": 95,
+        "right": 420,
+        "bottom": 415
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    },
+    {
+      "index": 3,
+      "zip_path": "images/03.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/03.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4413,
+      "sha256": "b44e0ca183170b933cddde632b6c56b0e056a3fac06b1ebfa0fa602b928bcb25",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6937,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.2109,
+        "right": 0.209,
+        "top": 0.1738,
+        "bottom": 0.1738
+      },
+      "subject_bbox": {
+        "left": 108,
+        "top": 89,
+        "right": 404,
+        "bottom": 422
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    },
+    {
+      "index": 4,
+      "zip_path": "images/04.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/04.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4465,
+      "sha256": "87960624509ffe44c764bdcd4cc2a73db906511dbc428428c656292b6b74a4ac",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6647,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.1953,
+        "right": 0.1934,
+        "top": 0.1602,
+        "bottom": 0.1621
+      },
+      "subject_bbox": {
+        "left": 100,
+        "top": 82,
+        "right": 412,
+        "bottom": 428
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    },
+    {
+      "index": 5,
+      "zip_path": "images/05.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/05.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4346,
+      "sha256": "13de5979b9c3b6f9321cfb72f8fa159b2501c66858c5e6a2f424623fefa85008",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6738,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.1797,
+        "right": 0.1777,
+        "top": 0.1855,
+        "bottom": 0.1875
+      },
+      "subject_bbox": {
+        "left": 92,
+        "top": 95,
+        "right": 420,
+        "bottom": 415
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    },
+    {
+      "index": 6,
+      "zip_path": "images/06.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/06.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4411,
+      "sha256": "04fdb8c4ce365b77ff1caa6b5332d218d381a407ab360a9231a1781dee57b24f",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6937,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.2109,
+        "right": 0.209,
+        "top": 0.1738,
+        "bottom": 0.1738
+      },
+      "subject_bbox": {
+        "left": 108,
+        "top": 89,
+        "right": 404,
+        "bottom": 422
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    },
+    {
+      "index": 7,
+      "zip_path": "images/07.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/07.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4466,
+      "sha256": "36fc288e9e258dce23f90813ed7c0aecf4fd93216594bb2927a820e3f2b0a77e",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6647,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.1953,
+        "right": 0.1934,
+        "top": 0.1602,
+        "bottom": 0.1621
+      },
+      "subject_bbox": {
+        "left": 100,
+        "top": 82,
+        "right": 412,
+        "bottom": 428
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    },
+    {
+      "index": 8,
+      "zip_path": "images/08.png",
+      "url_path": "/stage3b-review/work_stage3b_demo_8/images/08.png",
+      "width": 512,
+      "height": 512,
+      "byte_size": 4347,
+      "sha256": "009346a35d95d0f6594b1d394f02e0d9e908c4f19899bc13fa53949cd8eeb8c6",
+      "transparent_background_status": "pass",
+      "alpha_channel": true,
+      "transparent_pixel_ratio": 0.6738,
+      "safe_margin_status": "pass",
+      "safe_margin_threshold": 0.08,
+      "safe_margin_ratio": {
+        "left": 0.1797,
+        "right": 0.1777,
+        "top": 0.1855,
+        "bottom": 0.1875
+      },
+      "subject_bbox": {
+        "left": 92,
+        "top": 95,
+        "right": 420,
+        "bottom": 415
+      },
+      "needs_regeneration": false,
+      "review_status": "pass",
+      "source": "fallback",
+      "is_real_provider_output": false,
+      "grid_collage_detected": false
+    }
+  ],
+  "all_review_pass": true,
+  "export_enabled": true,
+  "notes": "Stage 3B demo/fallback independent transparent PNGs; no new OpenAI provider generation was run."
+}

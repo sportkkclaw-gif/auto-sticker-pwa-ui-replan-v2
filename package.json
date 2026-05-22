@@ -13,7 +13,8 @@
     "run:dev": "npm run dev",
     "acceptance:live": "node scripts/acceptance-live.mjs",
     "acceptance:stage2": "node scripts/stage2-acceptance.mjs",
-    "acceptance:stage3a": "node scripts/stage3a-acceptance.mjs"
+    "acceptance:stage3a": "node scripts/stage3a-acceptance.mjs",
+    "acceptance:stage3b": "node scripts/stage3b-acceptance.mjs"
   },
   "dependencies": {
     "next": "^15.1.0",
