@@ -1,14 +1,14 @@
 import Link from 'next/link';
 
-const workId = 'work_stage3b_demo_8';
+const workId = 'work_stage3b_openai_20260524142621';
 
 export default function Stage3BCreatePage() {
   return (
     <main className="wide-page">
       <section className="hero hero-commercial">
-        <div className="pwa-badge">Stage 3B Demo Mode</div>
+        <div className="pwa-badge">Stage 3B OpenAI Real Output</div>
         <h1>建立 8 張獨立 LINE 貼圖</h1>
-        <p>本輪驗收聚焦 create → generate 8 independent PNG stickers → review → zoom inspect → ZIP download。Demo 不重新呼叫 OpenAI，不宣稱新的 provider output。</p>
+        <p>本輪驗收聚焦 OpenAI Images API 真實輸出：create → generate 8 independent PNG stickers → review → zoom inspect → ZIP download。fallback image count = 0。</p>
         <div className="hero-actions">
           <Link className="btn-primary" href={`/stage3b-review/${workId}`}>Generate 8 stickers / 前往 Review</Link>
           <Link className="btn-secondary" href="/">回首頁</Link>

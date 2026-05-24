@@ -1,0 +1,10 @@
+{
+  "type": "LINE_STICKER_SET",
+  "work_id": "work_stage3b_openai_20260524142621",
+  "sticker_count": 8,
+  "file_pattern": "images/01.png through images/08.png",
+  "source": "provider",
+  "provider": "openai",
+  "transparent_background_required": true,
+  "safe_margin_threshold": 0.08
+}
