@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 type Sticker = {
@@ -36,23 +37,24 @@ type Manifest = {
   notes: string;
 };
 
-const fixedWorkId = 'work_stage3b_demo_8';
-const manifestUrl = `/stage3b-review/${fixedWorkId}/generation_manifest.json`;
-const providerUrl = `/stage3b-review/${fixedWorkId}/provider_evidence.json`;
-
 function statusClass(value: string) {
   return value === 'pass' ? 'ok' : value === 'failed' ? 'bad' : 'warn';
 }
 
 export default function Stage3BReviewPage() {
+  const params = useParams<{ workId: string }>();
+  const workId = String(params.workId || 'work_stage3b_demo_8');
+  const manifestUrl = `/stage3b-review/${workId}/generation_manifest.json`;
+  const providerUrl = `/stage3b-review/${workId}/provider_evidence.json`;
   const [manifest, setManifest] = useState<Manifest | null>(null);
   const [active, setActive] = useState<Sticker | null>(null);
   const [background, setBackground] = useState<'checker' | 'dark' | 'white'>('checker');
   const [rejected, setRejected] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
+    setManifest(null);
     fetch(manifestUrl).then((res) => res.json()).then(setManifest);
-  }, []);
+  }, [manifestUrl]);
 
   const allPass = useMemo(() => {
     if (!manifest) return false;
@@ -103,7 +105,6 @@ export default function Stage3BReviewPage() {
             </div>
             <div className="card-actions">
               <button className="tiny" onClick={() => setActive(img)}>Zoom inspect</button>
-              <button className="tiny" disabled>Regenerate single sticker — coming soon</button>
               <button className="tiny" onClick={() => setRejected((r) => ({ ...r, [img.index]: !r[img.index] }))}>{rejected[img.index] ? 'Undo reject' : 'Reject sticker'}</button>
             </div>
           </article>

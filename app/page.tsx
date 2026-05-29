@@ -1,16 +1,48 @@
 import Link from 'next/link';
 import { TEMPLATES } from '@/lib/mvpClientStore';
-export default function HomePage(){
- const hot=TEMPLATES.slice(0,4);
- return <main className="wide-page">
-  <section className="hero hero-commercial">
-   <div className="pwa-badge">📱 商業 MVP</div>
-   <h1>把照片變成專屬 LINE 貼圖</h1>
-   <p>上傳照片、選擇模板，自動生成可下載的貼圖素材包。先打通登入、點數、建立作品、扣點、ZIP 下載與購買入口。</p>
-   <div className="hero-actions"><Link className="btn-primary" href="/create">立即開始製作</Link><Link className="btn-secondary" href="/templates">查看熱門模板</Link></div>
-  </section>
-  <section className="card desktop-card"><h2>商業主流程</h2><div className="flow-grid">{['登入/使用者狀態','查看點數','選模板上傳照片','扣點建立作品','作品列表與詳情','ZIP下載','額度不足阻擋','購買 mock 點數'].map((x,i)=><div className="flow-step" key={x}><b>{i+1}</b><span>{x}</span></div>)}</div></section>
-  <section className="card desktop-card"><div className="section-title-row"><h2>熱門模板</h2><Link href="/templates">全部模板 →</Link></div><div className="template-grid">{hot.map(t=><Link key={t.id} href={`/templates/${t.id}`} className="template-card commercial"><div className="template-visual">{t.emoji}</div><div className="name">{t.name}</div><div className="desc">{t.description}</div><div className="tags">{t.recommended_count} 張 · 消耗 {t.credit_cost} 點</div></Link>)}</div></section>
-  <section className="cta-row"><Link href="/billing" className="mini-card">💳 額度管理</Link><Link href="/install" className="mini-card">📲 安裝 App</Link><Link href="/line-guide" className="mini-card">📋 LINE 規格</Link></section>
- </main>;
+
+export default function HomePage() {
+  const hot = TEMPLATES.slice(0, 4);
+  return (
+    <main className="wide-page">
+      <section className="hero hero-commercial">
+        <div className="pwa-badge">LINE 靜態貼圖 v1</div>
+        <h1>把素材變成可上傳 LINE 的貼圖 ZIP</h1>
+        <p>上傳照片或角色素材，輸入想要的風格，系統自動產生透明 PNG、main.png、tab.png 與 QC report。格式通過才開放下載。</p>
+        <div className="hero-actions">
+          <Link className="btn-primary" href="/create">開始生成</Link>
+          <Link className="btn-secondary" href="/line-guide">查看 LINE 規格</Link>
+        </div>
+      </section>
+
+      <section className="card desktop-card">
+        <h2>三步完成</h2>
+        <div className="flow-grid">
+          {['上傳基本素材', '輸入貼圖風格', '自動生成與 QC', '下載 LINE ZIP'].map((step, index) => (
+            <div className="flow-step" key={step}><b>{index + 1}</b><span>{step}</span></div>
+          ))}
+        </div>
+      </section>
+
+      <section className="card desktop-card">
+        <div className="section-title-row"><h2>風格靈感</h2><Link href="/templates">全部模板 →</Link></div>
+        <div className="template-grid">
+          {hot.map((template) => (
+            <Link key={template.id} href={`/create?template=${template.id}`} className="template-card commercial">
+              <div className="template-visual">{template.emoji}</div>
+              <div className="name">{template.name}</div>
+              <div className="desc">{template.description}</div>
+              <div className="tags">{template.recommended_count} 張 · 消耗 {template.credit_cost} 點</div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="cta-row">
+        <Link href="/billing" className="mini-card">點數管理</Link>
+        <Link href="/works" className="mini-card">我的作品</Link>
+        <Link href="/line-guide" className="mini-card">LINE 規格</Link>
+      </section>
+    </main>
+  );
 }
