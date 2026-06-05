@@ -1,0 +1,1 @@
+Stage 3B independent sticker ZIP. Contains images/01.png through images/08.png, generation_manifest.json, provider_evidence.json, and line_sticker_info.json. This round uses deterministic fallback/demo PNGs and does not claim new OpenAI provider output.

@@ -1,0 +1,72 @@
+{
+  "stage": "3B",
+  "provider": "openai",
+  "provider_name": "OpenAI Images API",
+  "model": "gpt-image-1",
+  "provider_attempt_status": "completed",
+  "started_at": "2026-05-24T14:26:21.091Z",
+  "completed_at": "2026-05-24T14:29:01.553Z",
+  "real_provider_output_count": 8,
+  "fallback_image_count": 0,
+  "no_new_openai_generation": false,
+  "output_counts": {
+    "provider": 8,
+    "fallback": 0
+  },
+  "request_count": 8,
+  "requests": [
+    {
+      "index": 1,
+      "request_id": "req_860ed2c0c99943638d5fc6c4ce84e9aa",
+      "response_id": null,
+      "latency_ms": 21020
+    },
+    {
+      "index": 2,
+      "request_id": "req_f4c337fe5c6c4c6a932393196da77483",
+      "response_id": null,
+      "latency_ms": 18903
+    },
+    {
+      "index": 3,
+      "request_id": "req_75ac5ba389c94cb9af4446ac4eacbc18",
+      "response_id": null,
+      "latency_ms": 18078
+    },
+    {
+      "index": 4,
+      "request_id": "req_892453be78df421188233ca1fc91484d",
+      "response_id": null,
+      "latency_ms": 20792
+    },
+    {
+      "index": 5,
+      "request_id": "req_5e4a6127984c4d7cbbdbd1786b5b0b44",
+      "response_id": null,
+      "latency_ms": 20098
+    },
+    {
+      "index": 6,
+      "request_id": "req_fabe3c0de56f48c48abbfc8e40dfbf88",
+      "response_id": null,
+      "latency_ms": 19348
+    },
+    {
+      "index": 7,
+      "request_id": "req_ddb348266a3946ee8685402bb759a1d1",
+      "response_id": null,
+      "latency_ms": 23975
+    },
+    {
+      "index": 8,
+      "request_id": "req_417d2743723f446aab04043a1e48ad6f",
+      "response_id": null,
+      "latency_ms": 17258
+    }
+  ],
+  "secret_scan": "pass_no_secret_values_written",
+  "production_deploy": "NO",
+  "pr_merge": "NO",
+  "simon_handoff": "NO",
+  "safe_margin_postprocess": "transparent_canvas_safe_margin_padding"
+}

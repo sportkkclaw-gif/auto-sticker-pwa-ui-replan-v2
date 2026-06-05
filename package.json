@@ -4,14 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "node scripts/build-drvfs-safe.mjs",
+    "start": "node scripts/start-drvfs-safe.mjs",
     "lint": "next lint",
     "test": "node scripts/test-suite.mjs",
     "test:api": "node scripts/test-suite.mjs",
     "run": "npm run build",
     "run:dev": "npm run dev",
-    "acceptance:live": "node scripts/acceptance-live.mjs"
+    "acceptance:live": "node scripts/acceptance-live.mjs",
+    "acceptance:stage2": "node scripts/stage2-acceptance.mjs",
+    "acceptance:stage3a": "node scripts/stage3a-acceptance.mjs",
+    "acceptance:stage3b": "node scripts/stage3b-acceptance.mjs",
+    "stage3b:openai-real": "node scripts/stage3b-openai-real-output.mjs"
   },
   "dependencies": {
     "next": "^15.1.0",

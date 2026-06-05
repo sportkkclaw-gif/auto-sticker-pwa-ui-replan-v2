@@ -1,0 +1,37 @@
+{
+  "api_hashes": {
+    "images/01.png": "fd3cc6d1d0f262c5c5cf9aca77b1d4124a2a113c6eb1290ef36d6434d5b088c9",
+    "images/02.png": "0cd28bf29eda387d7f25ba4274a0a0a5c64032111351954b97c499d3438a14e5",
+    "images/03.png": "01d79554b7bcb44501bdb1ea03fad8737c941e0005faeee91f7e0479de7749f7",
+    "images/04.png": "ee1a3fa5a2e928b731be911435de03a49327a3ed348bc568f77851c5673bb1cf",
+    "images/05.png": "0f73374b04ab23e16b76d0d686ce215d02d9c28c6eccdf6a6ba32c53af1c249a",
+    "images/06.png": "e4e3ed0c263224d07ce85e70c2ddce06a961b933bf3769dabfb33ae569ee0b25",
+    "images/07.png": "7c17b39224a30c44228c29011d0d6f688be4df5d9e5d3fadae8d9812044c777e",
+    "images/08.png": "e493b766a6f8ab8c9493517f286861cde0a2d6399b5bd31aa5ea6176162eb6e0"
+  },
+  "zip_hashes": {
+    "images/01.png": "fd3cc6d1d0f262c5c5cf9aca77b1d4124a2a113c6eb1290ef36d6434d5b088c9",
+    "images/02.png": "0cd28bf29eda387d7f25ba4274a0a0a5c64032111351954b97c499d3438a14e5",
+    "images/03.png": "01d79554b7bcb44501bdb1ea03fad8737c941e0005faeee91f7e0479de7749f7",
+    "images/04.png": "ee1a3fa5a2e928b731be911435de03a49327a3ed348bc568f77851c5673bb1cf",
+    "images/05.png": "0f73374b04ab23e16b76d0d686ce215d02d9c28c6eccdf6a6ba32c53af1c249a",
+    "images/06.png": "e4e3ed0c263224d07ce85e70c2ddce06a961b933bf3769dabfb33ae569ee0b25",
+    "images/07.png": "7c17b39224a30c44228c29011d0d6f688be4df5d9e5d3fadae8d9812044c777e",
+    "images/08.png": "e493b766a6f8ab8c9493517f286861cde0a2d6399b5bd31aa5ea6176162eb6e0"
+  },
+  "manifest_hashes": {
+    "images/01.png": "fd3cc6d1d0f262c5c5cf9aca77b1d4124a2a113c6eb1290ef36d6434d5b088c9",
+    "images/02.png": "0cd28bf29eda387d7f25ba4274a0a0a5c64032111351954b97c499d3438a14e5",
+    "images/03.png": "01d79554b7bcb44501bdb1ea03fad8737c941e0005faeee91f7e0479de7749f7",
+    "images/04.png": "ee1a3fa5a2e928b731be911435de03a49327a3ed348bc568f77851c5673bb1cf",
+    "images/05.png": "0f73374b04ab23e16b76d0d686ce215d02d9c28c6eccdf6a6ba32c53af1c249a",
+    "images/06.png": "e4e3ed0c263224d07ce85e70c2ddce06a961b933bf3769dabfb33ae569ee0b25",
+    "images/07.png": "7c17b39224a30c44228c29011d0d6f688be4df5d9e5d3fadae8d9812044c777e",
+    "images/08.png": "e493b766a6f8ab8c9493517f286861cde0a2d6399b5bd31aa5ea6176162eb6e0"
+  },
+  "image_hashes_match": true,
+  "zip_hash": "54d2fc50e0f1df59b3868d13d2dccfe3e1ba00f11c2ee337b658cb17c6d21e97",
+  "manifest_hash": "ec603adf26e162b712e2cb6c5d344a0c755f6851db0d31468c37373ba41e2d63",
+  "provider_evidence_hash": "506cf81213de12c8e391c458c46213e47d5f7c292f73f52c86b0c927f7439c94",
+  "output_hash": "81554c25fbe8ebe30be3e2c4bd71fbdad186a1263954792aa35ae2cd0bbd2cb9"
+}

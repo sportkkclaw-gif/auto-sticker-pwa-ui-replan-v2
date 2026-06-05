@@ -1,54 +1,55 @@
-'use client';
-import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { TEMPLATES } from '@/lib/mvpClientStore';
 
-const TEMPLATES: Record<string, { id: string; name: string; description: string; tags: string[]; defaultCount: 4 | 8 | 16; supportsAnimated: boolean }> = {
-  tpl_001: { id: 'tpl_001', name: 'Q版人像', description: '可愛Q版風格，圓潤線條，透明背景，適合LINE貼圖', tags: ['可愛', '人形', '透明背景'], defaultCount: 8, supportsAnimated: true },
-  tpl_002: { id: 'tpl_002', name: '情緒表情包', description: '各式情緒表情，開心/難過/生氣/驚訝', tags: ['表情', '情緒'], defaultCount: 8, supportsAnimated: true },
-  tpl_003: { id: 'tpl_003', name: '戀愛語錄', description: '浪漫語錄與愛心元素，情侶必備', tags: ['情侶', '浪漫'], defaultCount: 8, supportsAnimated: false },
-  tpl_004: { id: 'tpl_004', name: '毛孩貼圖', description: '寵物專用，貓狗可愛風格', tags: ['寵物', '可愛'], defaultCount: 8, supportsAnimated: true },
-  tpl_005: { id: 'tpl_005', name: '上班日常', description: '上班族日常抱怨與心聲', tags: ['辦公', '職場'], defaultCount: 8, supportsAnimated: false },
-  tpl_006: { id: 'tpl_006', name: '節慶祝福', description: '聖誕/新年/情人節節慶貼圖', tags: ['節日', '祝福'], defaultCount: 8, supportsAnimated: false },
-  tpl_007: { id: 'tpl_007', name: '品牌吉祥物', description: '品牌IP角色專用', tags: ['品牌', 'IP'], defaultCount: 8, supportsAnimated: true },
-  tpl_008: { id: 'tpl_008', name: '動態反應', description: '常用反應GIF動畫，LINE必備', tags: ['反應', 'GIF'], defaultCount: 4, supportsAnimated: true },
-};
-
-export default function TemplateDetailPage() {
-  const params = useParams();
-  const router = useRouter();
-  const tpl = TEMPLATES[params.id as string] || TEMPLATES['tpl_001'];
+export default async function TemplateDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const template = TEMPLATES.find((item) => item.id === id) || TEMPLATES[0];
 
   return (
-    <main>
-      <button onClick={() => router.back()} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, marginBottom: 8 }}>
-        ← 返回
-      </button>
+    <main className="wide-page">
+      <Link className="back-link" href="/templates">← 返回模板</Link>
+      <section className="card detail-hero user-template-detail">
+        <div className="template-detail-preview compare">
+          <div>
+            <img src={template.preview_image} alt={`${template.name} gpt-image-1 預覽`} />
+            <span>gpt-image-1</span>
+          </div>
+          <div>
+            <img src={template.preview_image_gpt_image_2} alt={`${template.name} gpt-image-2 預覽`} />
+            <span>gpt-image-2</span>
+          </div>
+        </div>
+        <div>
+          <span className="pwa-badge">{template.category}</span>
+          <h1>{template.name}</h1>
+          <p>{template.description}</p>
+          <div className="phrase-row large">
+            {template.preview_lines.map((line) => <b key={line}>{line}</b>)}
+          </div>
+          <div className="spec-list">
+            <div>建議張數 <b>{template.recommended_count} 張</b></div>
+            <div>消耗點數 <b>{template.credit_cost} 點</b></div>
+            <div>輸出格式 <b>LINE 靜態 PNG</b></div>
+            <div>背景 <b>透明</b></div>
+          </div>
+          <Link className="btn-primary" href={`/create?template=${template.id}`}>用這個模板開始</Link>
+        </div>
+      </section>
 
-      <div style={{ textAlign: 'center', marginBottom: 24 }}>
-        <div style={{
-          width: 160, height: 160, margin: 'auto', background: 'var(--bg-cream)',
-          borderRadius: 24, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 80, marginBottom: 16,
-        }}>
-          🎨
-        </div>
-        <h1 style={{ fontSize: 22, fontWeight: 800 }}>{tpl.name}</h1>
-        <p style={{ color: 'var(--muted)', fontSize: 14, marginTop: 8 }}>{tpl.description}</p>
-        <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginTop: 12 }}>
-          {tpl.tags.map(tag => (
-            <span key={tag} className="chip">{tag}</span>
-          ))}
-        </div>
-        <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 8 }}>
-          預設 {tpl.defaultCount} 張 {tpl.supportsAnimated ? '· 支援動態' : ''}
-        </div>
-      </div>
+      <section className="card desktop-card">
+        <h2>這包適合用在</h2>
+        <p className="muted">{template.use_case}</p>
+      </section>
 
-      <button
-        className="btn-primary"
-        onClick={() => router.push('/create')}
-      >
-        套用此模板
-      </button>
+      <section className="card desktop-card">
+        <h2>會自動帶入的風格</h2>
+        <p className="prompt-preview">{template.prompt}</p>
+      </section>
+
+      <section className="card desktop-card">
+        <h2>上架前提醒</h2>
+        <p className="risk-note large">{template.risk_note}</p>
+      </section>
     </main>
   );
 }

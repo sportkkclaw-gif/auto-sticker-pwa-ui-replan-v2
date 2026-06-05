@@ -1,0 +1,25 @@
+{
+  "stage": "3B",
+  "provider": "none_for_this_round",
+  "provider_attempt_status": "not_run_by_owner_instruction",
+  "generated_images_count": 8,
+  "real_provider_output_count": 0,
+  "fallback_image_count": 8,
+  "source_summary": {
+    "provider": 0,
+    "fallback": 8
+  },
+  "no_new_openai_generation": true,
+  "prompt_strategy_required": [
+    "single sticker character only",
+    "one pose / one expression",
+    "transparent background",
+    "centered subject",
+    "safe margin around subject",
+    "no sticker sheet",
+    "no collage",
+    "no grid",
+    "no multiple panels",
+    "LINE sticker style"
+  ]
+}

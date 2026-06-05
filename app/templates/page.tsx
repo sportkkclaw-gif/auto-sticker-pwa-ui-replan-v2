@@ -1,79 +1,108 @@
 'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
-const CATEGORIES = ['全部', 'Q版人像', '情緒表情包', '戀愛語錄', '毛孩貼圖', '上班日常', '節慶', '品牌吉祥物'];
-const ALL_TEMPLATES = [
-  { id: 'tpl_001', name: 'Q版人像', category: 'Q版人像', tags: ['可愛', '人形'], isPremium: false },
-  { id: 'tpl_002', name: '情緒表情包', category: '情緒表情包', tags: ['表情', '情緒'], isPremium: false },
-  { id: 'tpl_003', name: '戀愛語錄', category: '戀愛語錄', tags: ['情侶', '浪漫'], isPremium: false },
-  { id: 'tpl_004', name: '毛孩貼圖', category: '毛孩貼圖', tags: ['寵物', '可愛'], isPremium: false },
-  { id: 'tpl_005', name: '上班日常', category: '上班日常', tags: ['辦公', '職場'], isPremium: true },
-  { id: 'tpl_006', name: '節慶祝福', category: '節慶', tags: ['節日', '祝福'], isPremium: true },
-  { id: 'tpl_007', name: '品牌吉祥物', category: '品牌吉祥物', tags: ['品牌', 'IP'], isPremium: true },
-  { id: 'tpl_008', name: '動態反應', category: '動態反應', tags: ['反應', 'GIF'], isPremium: false },
-];
+import { useState } from 'react';
+import Link from 'next/link';
+import { CATEGORIES, TEMPLATES } from '@/lib/mvpClientStore';
+
+type PreviewMode = 'compare' | 'gpt-image-1' | 'gpt-image-2';
 
 export default function TemplatesPage() {
-  const router = useRouter();
-  const [activeCategory, setActiveCategory] = useState('全部');
-  const [search, setSearch] = useState('');
-
-  const filtered = ALL_TEMPLATES.filter(t =>
-    (activeCategory === '全部' || t.category === activeCategory) &&
-    t.name.includes(search)
-  );
+  const [cat, setCat] = useState('全部');
+  const [q, setQ] = useState('');
+  const [previewMode, setPreviewMode] = useState<PreviewMode>('compare');
+  const keyword = q.trim();
+  const list = TEMPLATES.filter((template) => {
+    const categoryMatch = cat === '全部' || template.category === cat || template.tags.includes(cat);
+    const text = [template.name, template.description, template.use_case, template.preview_lines.join(' '), template.tags.join(' ')].join(' ');
+    return categoryMatch && (!keyword || text.includes(keyword));
+  });
 
   return (
-    <main>
-      <div className="page-header">模板庫</div>
+    <main className="wide-page">
+      <section className="template-picker-hero">
+        <div>
+          <span className="pwa-badge">熱門模板</span>
+          <h1>看圖選風格</h1>
+          <p>每個方向都放入真實生成範例。選定後會自動帶入風格 prompt、常用台詞與建議張數。</p>
+        </div>
+        <Link className="btn-primary template-blank-action" href="/create">從空白開始</Link>
+      </section>
 
-      <div className="search-bar">
-        <input
-          type="search"
-          placeholder="搜尋模板..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-      </div>
+      <section className="template-toolbar">
+        <div className="search-bar">
+          <input placeholder="搜尋：早安、寵物、上班、戀愛..." value={q} onChange={(event) => setQ(event.target.value)} />
+        </div>
+        <div className="preview-mode-toggle" aria-label="選擇範例圖模式">
+          {[
+            ['compare', '對比'],
+            ['gpt-image-1', 'gpt-image-1'],
+            ['gpt-image-2', 'gpt-image-2'],
+          ].map(([value, label]) => (
+            <button
+              key={value}
+              className={previewMode === value ? 'active' : ''}
+              onClick={() => setPreviewMode(value as PreviewMode)}
+              type="button"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </section>
 
       <div className="chip-filter">
-        {CATEGORIES.map(cat => (
-          <button
-            key={cat}
-            className={`chip ${activeCategory === cat ? 'active' : ''}`}
-            onClick={() => setActiveCategory(cat)}
-          >
-            {cat}
-          </button>
+        {CATEGORIES.map((category) => (
+          <button key={category} className={`chip ${cat === category ? 'active' : ''}`} onClick={() => setCat(category)}>{category}</button>
         ))}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
-        {filtered.map(t => (
-          <div
-            key={t.id}
-            className="template-card"
-            onClick={() => router.push(`/templates/${t.id}`)}
-            style={{ flex: 'none', cursor: 'pointer' }}
-          >
-            <div style={{
-              width: '100%', aspectRatio: '1', background: 'var(--bg-cream)',
-              borderRadius: 12, display: 'flex', alignItems: 'center',
-              justifyContent: 'center', fontSize: 40,
-            }}>
-              🎨
+      <div className="template-grid user-template-grid">
+        {list.map((template) => (
+          <Link key={template.id} href={`/create?template=${template.id}`} className="user-template-card">
+            <div className={`user-template-visual ${previewMode === 'compare' ? 'is-compare' : ''}`}>
+              {previewMode === 'compare' ? (
+                <div className="template-compare-preview">
+                  <div>
+                    <img src={template.preview_image} alt={`${template.name} gpt-image-1 預覽`} />
+                    <small>gpt-image-1</small>
+                  </div>
+                  <div>
+                    <img src={template.preview_image_gpt_image_2} alt={`${template.name} gpt-image-2 預覽`} />
+                    <small>gpt-image-2</small>
+                  </div>
+                </div>
+              ) : (
+                <img
+                  src={previewMode === 'gpt-image-2' ? template.preview_image_gpt_image_2 : template.preview_image}
+                  alt={`${template.name} ${previewMode} 預覽`}
+                />
+              )}
+              <span>{template.category}</span>
             </div>
-            <div className="name">{t.name}</div>
-            <div className="tags">{t.tags.join(', ')}</div>
-            {t.isPremium && (
-              <span style={{ fontSize: 10, color: 'var(--yellow)', fontWeight: 700, marginTop: 4, display: 'block' }}>
-                🔒 Premium
-              </span>
-            )}
-          </div>
+            <div className="user-template-copy">
+              <h2>{template.name}</h2>
+              <p>{template.description}</p>
+            </div>
+            <div className="phrase-row">
+              {template.preview_lines.slice(0, 4).map((line) => <b key={line}>{line}</b>)}
+            </div>
+            <div className="template-chip-row">
+              {template.tags.slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}
+            </div>
+            <div className="template-card-footer">
+              <span>{template.recommended_count} 張 · {template.credit_cost} 點</span>
+              <b>套用</b>
+            </div>
+          </Link>
         ))}
       </div>
+
+      {list.length === 0 && (
+        <section className="card empty">
+          <h2>找不到符合的模板</h2>
+          <p className="muted">換個關鍵字，或先看全部模板。</p>
+        </section>
+      )}
     </main>
   );
 }
