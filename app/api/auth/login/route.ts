@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { mockRouteBlockedResponse, mockRoutesEnabled } from '@/lib/mock-guard';
 
 export async function POST(req: NextRequest) {
+  if (!mockRoutesEnabled()) return mockRouteBlockedResponse('Mock login');
+
   const body = await req.json().catch(() => ({}));
   const { email } = body;
 
