@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { mockRouteBlockedResponse, mockRoutesEnabled } from '@/lib/mock-guard';
 import { completePayment } from '@/lib/mock-store';
 
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!mockRoutesEnabled()) return mockRouteBlockedResponse('Mock payment completion');
+
   const { id } = await params;
   const result = completePayment(id);
   if (!result.ok) return NextResponse.json(result, { status: result.status });
