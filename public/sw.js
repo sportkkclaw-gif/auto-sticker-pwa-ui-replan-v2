@@ -1,5 +1,5 @@
 const CACHE_NAME='auto-sticker-commercial-mvp-v2';
-const STATIC_ASSETS=['/','/templates','/works','/account','/billing','/create','/install','/line-guide','/privacy','/terms','/offline','/manifest.webmanifest'];
+const STATIC_ASSETS=['/','/templates','/works','/account','/billing','/create','/install','/line-guide','/privacy','/terms','/data-deletion','/offline','/manifest.webmanifest'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(STATIC_ASSETS))); self.skipWaiting();});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(names=>Promise.all(names.filter(n=>n!==CACHE_NAME).map(n=>caches.delete(n))))); self.clients.claim();});
 self.addEventListener('fetch',event=>{const req=event.request; if(req.method!=='GET') return; const url=new URL(req.url); if(url.pathname.startsWith('/api/')){event.respondWith(fetch(req).catch(()=>new Response(JSON.stringify({error:{code:'OFFLINE_MODE',message:'目前離線'}}),{status:503,headers:{'Content-Type':'application/json'}}))); return;} event.respondWith(fetch(req).then(res=>{if(res.status===200){const c=res.clone(); caches.open(CACHE_NAME).then(cache=>cache.put(req,c));} return res;}).catch(()=>caches.match(req).then(cached=>cached||caches.match('/offline'))));});
