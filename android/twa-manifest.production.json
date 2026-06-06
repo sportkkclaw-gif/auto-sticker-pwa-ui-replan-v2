@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "mode": "production",
+  "appName": "AUTO 貼圖",
+  "shortName": "AUTO貼圖",
+  "packageId": "tw.com.autosticker.app",
+  "versionCode": 1,
+  "versionName": "1.0.0",
+  "minSdkVersion": 23,
+  "targetSdkVersion": 35,
+  "host": "sticker.su-sui.com",
+  "origin": "https://sticker.su-sui.com",
+  "startUrl": "https://sticker.su-sui.com/",
+  "scope": "https://sticker.su-sui.com/",
+  "webManifestUrl": "https://sticker.su-sui.com/manifest.webmanifest",
+  "themeColor": "#06C755",
+  "backgroundColor": "#F7F9FB",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://sticker.su-sui.com/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://sticker.su-sui.com/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://sticker.su-sui.com/icons/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "debugOnly": false,
+  "releaseSigning": {
+    "configuredInRepo": false,
+    "note": "Release keystore, passwords, and signing configs must stay outside the repository."
+  },
+  "digitalAssetLinks": {
+    "url": "https://sticker.su-sui.com/.well-known/assetlinks.json",
+    "sourceTemplate": "android/assetlinks.template.json",
+    "generatedPublicPath": "public/.well-known/assetlinks.json"
+  },
+  "playConsole": {
+    "developerAccountType": "personal",
+    "developerAccountCreatedAfter": "2023-11-13",
+    "closedTestingRequired": true,
+    "closedTestingMinimumTesters": 12,
+    "closedTestingMinimumContinuousDays": 14
+  },
+  "operator": {
+    "teamName": "SU-SUI",
+    "supportEmail": "sui@su-sui.com",
+    "dataDeletionContact": "sui@su-sui.com",
+    "privacyPolicyUrl": "https://sticker.su-sui.com/privacy",
+    "termsUrl": "https://sticker.su-sui.com/terms"
+  }
+}
