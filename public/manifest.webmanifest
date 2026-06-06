@@ -1,12 +1,15 @@
 {
-  "name": "AUTO動態貼圖",
-  "short_name": "AI貼圖",
-  "description": "AI LINE 貼圖生成工作室 - 上傳照片×模板，一鍵生成專屬LINE貼圖",
+  "name": "AUTO 貼圖",
+  "short_name": "AUTO貼圖",
+  "description": "用自己的圖片與範本建立可審查的 LINE 靜態貼圖 ZIP 素材。",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait",
-  "theme_color": "#FF6B8A",
-  "background_color": "#FFF7E8",
+  "theme_color": "#06C755",
+  "background_color": "#F7F9FB",
   "categories": ["photo", "entertainment", "utilities"],
   "screenshots": [],
   "icons": [
@@ -34,7 +37,7 @@
       "name": "建立貼圖",
       "short_name": "建立",
       "url": "/create",
-      "description": "快速建立新貼圖"
+      "description": "上傳素材並建立貼圖"
     },
     {
       "name": "我的作品",
