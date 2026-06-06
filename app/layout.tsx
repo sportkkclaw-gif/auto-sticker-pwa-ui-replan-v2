@@ -3,9 +3,9 @@ import './globals.css';
 import BottomNav from './components/BottomNav';
 
 export const metadata: Metadata = {
-  title: 'AUTO動態貼圖 - AI LINE 貼圖生成工作室',
-  description: '上傳照片 × 模板提示，一鍵生成專屬 LINE 貼圖',
-  appleWebApp: { capable: true, statusBarStyle: 'default', title: 'AI貼圖' },
+  title: 'AUTO 貼圖 - AI LINE 靜態貼圖製作',
+  description: '用自己的圖片與範本建立可審查的 LINE 靜態貼圖 ZIP 素材。',
+  appleWebApp: { capable: true, statusBarStyle: 'default', title: 'AUTO 貼圖' },
   manifest: '/manifest.webmanifest',
 };
 
@@ -14,7 +14,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#FF6B8A',
+  themeColor: '#06C755',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
