@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "tw.com.autosticker.app",
+      "sha256_cert_fingerprints": [
+        "81:D2:2C:2A:C4:E5:EF:50:0E:92:4F:E7:2C:04:0D:B3:1E:4F:2E:EC:9A:48:99:F4:B9:AA:5E:C5:4A:B1:A8:67"
+      ]
+    }
+  }
+]
